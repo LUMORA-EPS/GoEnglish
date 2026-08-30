@@ -43,17 +43,24 @@ const state = {
 };
 
 const STORAGE_KEY = "falaLabProgress";
+const THEME_KEY = "falaLabTheme";
+const DEFAULT_PROGRESS = { attempts: 0, scoreSum: 0, streak: 0, bestStreak: 0, learned: [], favorites: [], history: [] };
+
 function loadProgress() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) return { ...DEFAULT_PROGRESS, ...JSON.parse(raw) };
   } catch (e) { /* ignore corrupt storage */ }
-  return { attempts: 0, scoreSum: 0, streak: 0, learned: [] };
+  return { ...DEFAULT_PROGRESS };
 }
 function saveProgress(p) {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (e) { /* storage unavailable */ }
 }
 let progress = loadProgress();
+
+let speechRate = 0.9;
+let showFavoritesOnly = false;
+let showUnmasteredOnly = false;
 
 // ---------------------------------------------------------------------------
 // Elementos do DOM
@@ -82,6 +89,17 @@ const statStreak = document.getElementById("stat-streak");
 const statLearned = document.getElementById("stat-learned");
 const resetProgressBtn = document.getElementById("reset-progress-btn");
 
+const favoritesToggle = document.getElementById("favorites-toggle");
+const unmasteredToggle = document.getElementById("unmastered-toggle");
+const rateBtns = document.querySelectorAll(".rate-btn");
+const randomPhraseBtn = document.getElementById("random-phrase-btn");
+const attemptHistoryEl = document.getElementById("attempt-history");
+const toastContainer = document.getElementById("toast-container");
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const micVisualizer = document.getElementById("mic-visualizer");
+const feedbackPlaceholderText = document.getElementById("feedback-placeholder-text");
+
 // ---------------------------------------------------------------------------
 // Menu mobile
 // ---------------------------------------------------------------------------
@@ -104,7 +122,9 @@ function getFilteredLessons() {
   return lessonsData.filter((item) => {
     const matchesCategory = state.category === "todos" || item.category === state.category;
     const matchesSearch = !term || normalize(item.en).includes(term) || normalize(item.pt).includes(term);
-    return matchesCategory && matchesSearch;
+    const matchesFavorite = !showFavoritesOnly || progress.favorites.includes(item.en);
+    const matchesUnmastered = !showUnmasteredOnly || !progress.learned.includes(item.en);
+    return matchesCategory && matchesSearch && matchesFavorite && matchesUnmastered;
   });
 }
 
@@ -115,13 +135,17 @@ function renderCards() {
 
   filtered.forEach((item) => {
     const isMastered = progress.learned.includes(item.en);
+    const isFavorite = progress.favorites.includes(item.en);
     const card = document.createElement("div");
     card.className = "lesson-card";
     card.innerHTML = `
-      ${isMastered ? '<span class="mastered-badge">✓ dominada</span>' : ""}
+      <div class="absolute top-4 right-4 flex items-center gap-2">
+        ${isMastered ? '<span class="mastered-badge">✓ dominada</span>' : ""}
+        <button class="favorite-btn ${isFavorite ? "is-fav" : ""}" data-en="${escapeAttr(item.en)}" aria-label="Favoritar">${isFavorite ? "★" : "☆"}</button>
+      </div>
       <div>
         <span class="tag">${item.category}</span>
-        <h3 class="text-xl font-display font-semibold text-[--ink] mt-4">${item.en}</h3>
+        <h3 class="text-xl font-display font-semibold text-[--ink] mt-4 pr-8">${item.en}</h3>
         <p class="text-[--ink]/50 text-sm mt-1">${item.pt}</p>
         <p class="text-xs text-[--ink]/35 mt-2 font-mono">${item.phonetic}</p>
       </div>
@@ -142,12 +166,35 @@ function escapeAttr(str) {
 cardsGrid.addEventListener("click", (e) => {
   const speakBtn = e.target.closest(".speak-btn");
   const practiceBtn = e.target.closest(".practice-btn");
+  const favBtn = e.target.closest(".favorite-btn");
   if (speakBtn) {
     speakText(speakBtn.dataset.en);
   } else if (practiceBtn) {
     setTargetPhrase(practiceBtn.dataset.en);
     document.getElementById("laboratorio").scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if (favBtn) {
+    toggleFavorite(favBtn.dataset.en);
   }
+});
+
+function toggleFavorite(en) {
+  const idx = progress.favorites.indexOf(en);
+  if (idx >= 0) progress.favorites.splice(idx, 1);
+  else progress.favorites.push(en);
+  saveProgress(progress);
+  renderCards();
+}
+
+favoritesToggle.addEventListener("click", () => {
+  showFavoritesOnly = !showFavoritesOnly;
+  favoritesToggle.classList.toggle("active", showFavoritesOnly);
+  renderCards();
+});
+
+unmasteredToggle.addEventListener("click", () => {
+  showUnmasteredOnly = !showUnmasteredOnly;
+  unmasteredToggle.classList.toggle("active", showUnmasteredOnly);
+  renderCards();
 });
 
 // Filtros de categoria
@@ -210,13 +257,52 @@ function speakText(text) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "en-US";
-  utterance.rate = 0.9; // Velocidade levemente reduzida para iniciantes
+  utterance.rate = speechRate;
   window.speechSynthesis.speak(utterance);
 }
 
 listenTargetBtn.addEventListener("click", () => {
   const text = targetPhraseInput.value.trim();
   if (text) speakText(text);
+});
+
+// Enter no campo de frase = ouvir o modelo
+targetPhraseInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    listenTargetBtn.click();
+  }
+});
+
+// Controle de velocidade da fala
+rateBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    rateBtns.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    speechRate = parseFloat(btn.dataset.rate);
+  });
+});
+
+// Frase aleatória
+randomPhraseBtn.addEventListener("click", () => {
+  const pool = getFilteredLessons().length ? getFilteredLessons() : lessonsData;
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  setTargetPhrase(pick.en);
+  speakText(pick.en);
+});
+
+// ---------------------------------------------------------------------------
+// Modo escuro
+// ---------------------------------------------------------------------------
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+}
+themeToggle.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  const next = current === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* ignore */ }
 });
 
 // ---------------------------------------------------------------------------
@@ -282,6 +368,69 @@ function setRecordingUI(active) {
   startRecordBtn.disabled = active;
   startRecordBtn.classList.toggle("recording", active);
   startRecordBtn.textContent = active ? "🎙️ Ouvindo…" : "🎤 Falar / Testar";
+  if (active) {
+    feedbackPlaceholder.classList.remove("hidden");
+    feedbackContainer.classList.add("hidden");
+    feedbackPlaceholderText.textContent = "Fale agora…";
+    micVisualizer.classList.remove("hidden");
+    startMicVisualizer();
+  } else {
+    micVisualizer.classList.add("hidden");
+    feedbackPlaceholderText.textContent = "Sua comparação vai aparecer aqui.";
+    stopMicVisualizer();
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Visualizador de microfone ao vivo (puramente decorativo, usa a mesma
+// permissão de microfone já concedida ao SpeechRecognition)
+// ---------------------------------------------------------------------------
+let micStream = null, micAudioCtx = null, micAnalyser = null, micRafId = null;
+
+async function startMicVisualizer() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+  try {
+    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    micAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = micAudioCtx.createMediaStreamSource(micStream);
+    micAnalyser = micAudioCtx.createAnalyser();
+    micAnalyser.fftSize = 256;
+    source.connect(micAnalyser);
+    drawMicLevels();
+  } catch (e) {
+    // Permissão negada ou indisponível — segue sem visualizador, o reconhecimento continua funcionando.
+  }
+}
+
+function drawMicLevels() {
+  const ctx = micVisualizer.getContext("2d");
+  micVisualizer.width = micVisualizer.clientWidth * devicePixelRatio;
+  micVisualizer.height = micVisualizer.clientHeight * devicePixelRatio;
+  const data = new Uint8Array(micAnalyser.frequencyBinCount);
+
+  function loop() {
+    micRafId = requestAnimationFrame(loop);
+    micAnalyser.getByteFrequencyData(data);
+    const w = micVisualizer.width, h = micVisualizer.height;
+    ctx.clearRect(0, 0, w, h);
+    const bars = 28;
+    const step = Math.floor(data.length / bars);
+    for (let i = 0; i < bars; i++) {
+      const value = data[i * step] / 255;
+      const barHeight = Math.max(3, value * h * 0.9);
+      ctx.fillStyle = "#F2A541";
+      ctx.fillRect((w / bars) * i + 2, (h - barHeight) / 2, w / bars - 4, barHeight);
+    }
+  }
+  loop();
+}
+
+function stopMicVisualizer() {
+  if (micRafId) cancelAnimationFrame(micRafId);
+  if (micStream) micStream.getTracks().forEach((t) => t.stop());
+  if (micAudioCtx) micAudioCtx.close();
+  micStream = micAudioCtx = micAnalyser = null;
+  micRafId = null;
 }
 
 startRecordBtn.addEventListener("click", () => {
@@ -359,12 +508,55 @@ function recordAttempt(phraseEn, accuracy) {
   progress.attempts += 1;
   progress.scoreSum += accuracy;
   progress.streak = accuracy >= 60 ? progress.streak + 1 : 0;
-  if (accuracy >= 90 && !progress.learned.includes(phraseEn)) {
-    progress.learned.push(phraseEn);
-  }
+  progress.bestStreak = Math.max(progress.bestStreak, progress.streak);
+
+  const justMastered = accuracy >= 90 && !progress.learned.includes(phraseEn);
+  if (justMastered) progress.learned.push(phraseEn);
+
+  progress.history.unshift({ phrase: phraseEn, accuracy, time: Date.now() });
+  progress.history = progress.history.slice(0, 5);
+
   saveProgress(progress);
   renderStats();
   renderCards(); // atualiza badge "dominada" se aplicável
+  renderHistory();
+  checkAchievements(justMastered);
+}
+
+function renderHistory() {
+  if (!progress.history.length) {
+    attemptHistoryEl.innerHTML = '<li class="text-[--paper]/30">— nenhuma tentativa ainda —</li>';
+    return;
+  }
+  attemptHistoryEl.innerHTML = progress.history.map((h) => {
+    const time = new Date(h.time).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    const color = h.accuracy >= 90 ? "text-emerald-400" : h.accuracy >= 60 ? "text-amber-400" : "text-rose-400";
+    return `<li class="flex justify-between gap-3"><span class="truncate">${h.phrase}</span><span class="${color} shrink-0">${h.accuracy}% · ${time}</span></li>`;
+  }).join("");
+}
+
+// ---------------------------------------------------------------------------
+// Conquistas (toasts simples)
+// ---------------------------------------------------------------------------
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+  toastContainer.appendChild(toast);
+  setTimeout(() => toast.classList.add("show"), 10);
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
+  }, 3200);
+}
+
+function checkAchievements(justMastered) {
+  if ([3, 5, 10, 20].includes(progress.streak)) {
+    showToast(`🔥 Sequência de ${progress.streak} acertos seguidos!`);
+  }
+  if (justMastered && [1, 5, 10, lessonsData.length].includes(progress.learned.length)) {
+    showToast(`🏅 ${progress.learned.length} frase(s) dominada(s)!`);
+  }
 }
 
 function renderStats() {
@@ -376,10 +568,15 @@ function renderStats() {
 
 resetProgressBtn.addEventListener("click", () => {
   if (!confirm("Reiniciar todo o progresso salvo neste navegador?")) return;
-  progress = { attempts: 0, scoreSum: 0, streak: 0, learned: [] };
+  progress = { ...DEFAULT_PROGRESS };
+  showFavoritesOnly = false;
+  showUnmasteredOnly = false;
+  favoritesToggle.classList.remove("active");
+  unmasteredToggle.classList.remove("active");
   saveProgress(progress);
   renderStats();
   renderCards();
+  renderHistory();
   feedbackContainer.classList.add("hidden");
   feedbackPlaceholder.classList.remove("hidden");
 });
@@ -426,9 +623,14 @@ function drawHeroWave() {
 // Inicialização
 // ---------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
+  let savedTheme = "light";
+  try { savedTheme = localStorage.getItem(THEME_KEY) || "light"; } catch (e) { /* ignore */ }
+  applyTheme(savedTheme);
+
   renderCards();
   populateLessonSelect();
   setTargetPhrase("Hello");
   renderStats();
+  renderHistory();
   drawHeroWave();
 });
