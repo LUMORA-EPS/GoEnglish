@@ -1,13 +1,14 @@
 // ============================================
-// GOENGLISH - COMPLETE APPLICATION
+// GOENGLISH - COMPLETE APPLICATION v2.0
 // ============================================
 
 // Global App Object
 const app = {
-    // User Data
+    // User Data (Expanded)
     userData: {
         name: 'Student',
         currentLevel: 'A1',
+        testedLevel: null,
         xp: 0,
         streak: 0,
         lessonsCompleted: 0,
@@ -16,15 +17,32 @@ const app = {
         completedLessons: [],
         achievements: [],
         dailyGoal: 0,
-        lastStudyDate: new Date().toDateString()
+        lastStudyDate: new Date().toDateString(),
+        favorites: [],
+        bookmarkedLessons: [],
+        journalEntries: [],
+        errorLog: [],
+        wordStatuses: {},
+        wordReview: [],
+        studyCalendar: {},
+        goals: {
+            wordsPerDay: 5,
+            minutesPerDay: 30,
+            lessonsPerDay: 1,
+            xpPerDay: 50
+        },
+        localRanking: 1
     },
 
-    // Settings
+    // Settings (Expanded)
     settings: {
         theme: 'dark',
         soundEnabled: true,
         autoPlayAudio: true,
-        audioSpeed: 1
+        audioSpeed: 1,
+        fontSize: 16,
+        animationsEnabled: true,
+        interfaceLanguage: 'en'
     },
 
     // Current Page
@@ -313,6 +331,126 @@ const app = {
             { id: 'ach-1000xp', icon: '⭐', name: '1000 XP', description: 'Earn 1000 XP' },
             { id: 'ach-30days', icon: '📅', name: '30 Day Challenge', description: 'Study for 30 days' },
             { id: 'ach-allverbs', icon: '⚡', name: 'Verb Master', description: 'Learn all major English verbs' }
+        ],
+
+        // NEW: Level Test Questions
+        levelTestQuestions: [
+            { id: 'lvl-1', level: 'A1', text: 'What is your name?', options: ['I am student', 'My name is John', 'I like English'], correct: 1 },
+            { id: 'lvl-2', level: 'A1', text: 'Choose the correct form:', options: ['She go to school', 'She goes to school', 'She going to school'], correct: 1 },
+            { id: 'lvl-3', level: 'A2', text: 'Complete: I have ____ in this city for 2 years.', options: ['lived', 'live', 'living'], correct: 0 },
+            { id: 'lvl-4', level: 'A2', text: 'Which is correct?', options: ['If you will study, you pass', 'If you study, you will pass', 'If you studied, you passed'], correct: 1 },
+            { id: 'lvl-5', level: 'B1', text: 'Choose the best option:', options: ['Despite the rain, he went out', 'Although the rain, he went out', 'Though rain, he went out'], correct: 0 },
+            { id: 'lvl-6', level: 'B1', text: 'What does "procrastinate" mean?', options: ['To delay action', 'To prepare', 'To think'], correct: 0 },
+            { id: 'lvl-7', level: 'B2', text: 'Complete: _____ he hadn\'t studied, he passed the exam.', options: ['Though', 'Because', 'So'], correct: 0 },
+            { id: 'lvl-8', level: 'B2', text: 'Which is grammatically correct?', options: ['Had I known, I would have come', 'If I had known, I would come', 'Had I known, I would come'], correct: 0 },
+            { id: 'lvl-9', level: 'C1', text: 'What\'s a synonym for "ubiquitous"?', options: ['Rare', 'Everywhere', 'Unknown'], correct: 1 },
+            { id: 'lvl-10', level: 'C2', text: 'Complete: The politician\'s _____ speech failed to sway public opinion.', options: ['fulsome', 'pellucid', 'perspicacious'], correct: 0 }
+        ],
+
+        // NEW: Why Explanations
+        whyExplanations: [
+            { id: 'why-1', category: 'Grammar', question: 'Why do we use "have been"?', answer: 'Present perfect continuous shows an action that started in the past and continues to now.' },
+            { id: 'why-2', category: 'Grammar', question: 'Why is "to" used after "going"?', answer: 'The infinitive form requires "to" before the base verb: going to + verb.' },
+            { id: 'why-3', category: 'Vocabulary', question: 'Why do British and American English differ?', answer: 'Different spellings evolved due to Webster\'s influence in American English.' },
+            { id: 'why-4', category: 'Pronunciation', question: 'Why is "th" difficult?', answer: 'Many languages don\'t have this sound, requiring tongue placement practice.' }
+        ],
+
+        // NEW: English Varieties Comparison
+        englishVarieties: [
+            { word: 'elevator', american: 'elevator', british: 'lift', canadian: 'elevator', australian: 'lift' },
+            { word: 'color', american: 'color', british: 'colour', canadian: 'colour', australian: 'colour' },
+            { word: 'apartment', american: 'apartment', british: 'flat', canadian: 'apartment', australian: 'flat' },
+            { word: 'truck', american: 'truck', british: 'lorry', canadian: 'truck', australian: 'truck' },
+            { word: 'cell phone', american: 'cell phone', british: 'mobile phone', canadian: 'cell phone', australian: 'mobile phone' }
+        ],
+
+        // NEW: Conversation Scenarios
+        conversationScenarios: [
+            {
+                id: 'conv-airport',
+                title: 'At the Airport',
+                lines: [
+                    { speaker: 'Agent', text: 'Good morning. Can I help you?' },
+                    { speaker: 'You', text: 'Yes, I need to check in for flight 234 to New York.' },
+                    { speaker: 'Agent', text: 'Passport, please. Do you have any luggage?' },
+                    { speaker: 'You', text: 'Yes, I have two suitcases.' }
+                ]
+            },
+            {
+                id: 'conv-restaurant',
+                title: 'At the Restaurant',
+                lines: [
+                    { speaker: 'Waiter', text: 'Welcome! A table for how many?' },
+                    { speaker: 'You', text: 'For two, please.' },
+                    { speaker: 'Waiter', text: 'Right this way. Can I get you something to drink?' },
+                    { speaker: 'You', text: 'I\'ll have water, please.' }
+                ]
+            },
+            {
+                id: 'conv-hotel',
+                title: 'At the Hotel',
+                lines: [
+                    { speaker: 'Receptionist', text: 'Good evening, welcome to our hotel!' },
+                    { speaker: 'You', text: 'Thank you. I have a reservation under Smith.' },
+                    { speaker: 'Receptionist', text: 'Let me check... Yes, room 305. Here\'s your key.' },
+                    { speaker: 'You', text: 'Thank you. What time is breakfast?' }
+                ]
+            },
+            {
+                id: 'conv-interview',
+                title: 'Job Interview',
+                lines: [
+                    { speaker: 'Interviewer', text: 'Tell me about your experience.' },
+                    { speaker: 'You', text: 'I have 5 years of experience in software development.' },
+                    { speaker: 'Interviewer', text: 'What are your strengths?' },
+                    { speaker: 'You', text: 'I\'m a good problem-solver and work well in teams.' }
+                ]
+            }
+        ],
+
+        // NEW: Mini Games Data
+        miniGames: [
+            {
+                type: 'wordMatch',
+                title: 'Word Match',
+                description: 'Match words with their meanings',
+                pairs: [
+                    { word: 'Happy', meaning: 'Feliz' },
+                    { word: 'Sad', meaning: 'Triste' },
+                    { word: 'Fast', meaning: 'Rápido' },
+                    { word: 'Slow', meaning: 'Lento' }
+                ]
+            },
+            {
+                type: 'memory',
+                title: 'Memory Game',
+                description: 'Remember the hidden cards',
+                cards: ['Hello', 'Goodbye', 'Thanks', 'Sorry', 'Please', 'Yes']
+            },
+            {
+                type: 'scramble',
+                title: 'Word Scramble',
+                description: 'Unscramble the letters',
+                words: ['LOHEL', 'DOOGBYE', 'ERATCHEH', 'RACHE']
+            },
+            {
+                type: 'speedQuiz',
+                title: 'Speed Quiz',
+                description: 'Answer as fast as you can',
+                questions: [
+                    { q: 'What is 2+2?', a: '4' },
+                    { q: 'What is the capital of France?', a: 'Paris' },
+                    { q: 'Spell "hello"', a: 'hello' }
+                ]
+            }
+        ],
+
+        // NEW: Library Content
+        libraryContent: [
+            { id: 'lib-1', title: 'The Tortoise and the Hare', level: 'A1', type: 'story', content: 'A famous fable about patience and perseverance...' },
+            { id: 'lib-2', title: 'Common Food Words', level: 'A1', type: 'article', content: 'Learn vocabulary for common foods...' },
+            { id: 'lib-3', title: 'Daily Routine Dialogue', level: 'A2', type: 'dialogue', content: 'A conversation between friends about their day...' },
+            { id: 'lib-4', title: 'The Great Gatsby Summary', level: 'B2', type: 'article', content: 'Summary of the famous American novel...' }
         ]
     },
 
@@ -369,6 +507,26 @@ const app = {
             this.settings.audioSpeed = parseFloat(e.target.value);
             this.saveData();
         });
+
+        // Font Size Setting
+        const fontSizeEl = document.getElementById('fontSize');
+        if (fontSizeEl) {
+            fontSizeEl.addEventListener('change', (e) => {
+                this.settings.fontSize = parseInt(e.target.value);
+                document.body.style.fontSize = this.settings.fontSize + 'px';
+                this.saveData();
+            });
+        }
+
+        // Animations Setting
+        const animationsEl = document.getElementById('animationsEnabled');
+        if (animationsEl) {
+            animationsEl.addEventListener('change', (e) => {
+                this.settings.animationsEnabled = e.target.checked;
+                document.body.classList.toggle('no-animations', !e.target.checked);
+                this.saveData();
+            });
+        }
     },
 
     // Page Navigation
@@ -401,6 +559,24 @@ const app = {
 
     getPageTitle(pageName) {
         const titles = {
+            onboarding: 'Welcome to GoEnglish',
+            levelTest: 'Level Test',
+            goals: 'Learning Goals',
+            calendar: 'Study Calendar',
+            statistics: 'Statistics',
+            learningPath: 'Learning Path',
+            flashcards: 'Flashcards',
+            pronounceTrainer: 'Pronunciation Trainer',
+            conversation: 'Conversation Practice',
+            journal: 'English Journal',
+            englishVarieties: 'English Varieties',
+            why: 'Why Explanations',
+            errorNotebook: 'Error Notebook',
+            library: 'Reading Library',
+            stories: 'Interactive Stories',
+            games: 'Mini Games',
+            favorites: 'Your Favorites',
+            ranking: 'Local Ranking',
             dashboard: 'Dashboard',
             learn: 'Start Learning',
             grammar: 'Grammar',
@@ -445,11 +621,71 @@ const app = {
 
     applyTheme() {
         this.setTheme(this.settings.theme);
+        // Apply font size
+        document.body.style.fontSize = this.settings.fontSize + 'px';
+        // Apply animations setting
+        if (!this.settings.animationsEnabled) {
+            document.body.classList.add('no-animations');
+        }
     },
 
-    // Render Content
+    // Render Content (Updated with new pages)
     renderPageContent(pageName) {
         switch(pageName) {
+            case 'onboarding':
+                this.renderOnboarding();
+                break;
+            case 'levelTest':
+                this.renderLevelTest();
+                break;
+            case 'goals':
+                this.renderGoals();
+                break;
+            case 'calendar':
+                this.renderCalendar();
+                break;
+            case 'statistics':
+                this.renderStatistics();
+                break;
+            case 'learningPath':
+                this.renderLearningPath();
+                break;
+            case 'flashcards':
+                this.renderFlashcards();
+                break;
+            case 'pronounceTrainer':
+                this.renderPronounceTrainer();
+                break;
+            case 'conversation':
+                this.renderConversation();
+                break;
+            case 'journal':
+                this.renderJournal();
+                break;
+            case 'englishVarieties':
+                this.renderEnglishVarieties();
+                break;
+            case 'why':
+                this.renderWhy();
+                break;
+            case 'errorNotebook':
+                this.renderErrorNotebook();
+                break;
+            case 'library':
+                this.renderLibrary();
+                break;
+            case 'stories':
+                this.renderStories();
+                break;
+            case 'games':
+                this.renderGames();
+                break;
+            case 'favorites':
+                this.renderFavorites();
+                break;
+            case 'ranking':
+                this.renderRanking();
+                break;
             case 'grammar':
                 this.renderGrammar();
                 break;
@@ -482,6 +718,9 @@ const app = {
                 break;
             case 'achievements':
                 this.renderAchievements();
+                break;
+            case 'settings':
+                this.renderSettings();
                 break;
             case 'profile':
                 this.renderProfile();
@@ -802,6 +1041,662 @@ const app = {
             `).join('');
 
         document.getElementById('userName').value = this.userData.name;
+    },
+
+    renderSettings() {
+        const container = document.querySelector('.settings-container');
+        if (!container) return;
+
+        container.innerHTML = `
+            <h2>⚙️ Settings</h2>
+
+            <div class="settings-section">
+                <h3>Theme</h3>
+                <div class="settings-option">
+                    <label>Current Theme: ${this.settings.theme === 'dark' ? 'Dark' : this.settings.theme === 'light' ? 'Light' : 'Purple'}</label>
+                    <button id="themeToggle" class="btn btn-secondary">🌙 Toggle Theme</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Audio</h3>
+                <div class="settings-option">
+                    <label>
+                        <input type="checkbox" id="soundEnabled" ${this.settings.soundEnabled ? 'checked' : ''}>
+                        Enable Sound
+                    </label>
+                </div>
+                <div class="settings-option">
+                    <label>
+                        <input type="checkbox" id="autoPlayAudio" ${this.settings.autoPlayAudio ? 'checked' : ''}>
+                        Auto-Play Audio
+                    </label>
+                </div>
+                <div class="settings-option">
+                    <label>Audio Speed: 
+                        <select id="audioSpeed">
+                            <option value="0.5" ${this.settings.audioSpeed === 0.5 ? 'selected' : ''}>0.5x (Slow)</option>
+                            <option value="1" ${this.settings.audioSpeed === 1 ? 'selected' : ''}>1x (Normal)</option>
+                            <option value="1.5" ${this.settings.audioSpeed === 1.5 ? 'selected' : ''}>1.5x (Fast)</option>
+                            <option value="2" ${this.settings.audioSpeed === 2 ? 'selected' : ''}>2x (Very Fast)</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Display</h3>
+                <div class="settings-option">
+                    <label>Font Size:
+                        <select id="fontSize">
+                            <option value="14" ${this.settings.fontSize === 14 ? 'selected' : ''}>Small (14px)</option>
+                            <option value="16" ${this.settings.fontSize === 16 ? 'selected' : ''}>Normal (16px)</option>
+                            <option value="18" ${this.settings.fontSize === 18 ? 'selected' : ''}>Large (18px)</option>
+                            <option value="20" ${this.settings.fontSize === 20 ? 'selected' : ''}>Extra Large (20px)</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="settings-option">
+                    <label>
+                        <input type="checkbox" id="animationsEnabled" ${this.settings.animationsEnabled ? 'checked' : ''}>
+                        Enable Animations
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Profile</h3>
+                <div class="settings-option">
+                    <label>Your Name:
+                        <input type="text" id="userName" value="${this.userData.name}">
+                    </label>
+                    <button class="btn btn-primary" onclick="app.saveName()">Save Name</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Data</h3>
+                <button class="btn btn-secondary" onclick="app.exportData()">📥 Export Progress</button>
+                <button class="btn btn-danger" onclick="app.resetProgress()">🔄 Reset Progress</button>
+            </div>
+        `;
+
+        // Re-attach event listeners after rendering
+        setTimeout(() => this.setupEventListeners(), 100);
+    },
+
+    // ============== NEW FEATURE RENDERERS ==============
+
+    // Onboarding
+    renderOnboarding() {
+        const container = document.getElementById('onboardingContent');
+        if (!container) return;
+        container.innerHTML = `
+            <div class="onboarding-flow">
+                <h2>Welcome to GoEnglish! 🎓</h2>
+                <p>Let's set up your learning journey</p>
+                <div class="onboarding-steps">
+                    <h3>Step 1: Choose Your Goal</h3>
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="app.setGoal('fluency')">Achieve Fluency</button>
+                        <button class="btn btn-primary" onclick="app.setGoal('exam')">Prepare for Exam</button>
+                        <button class="btn btn-primary" onclick="app.setGoal('career')">Career Development</button>
+                    </div>
+                    <h3>Step 2: Take a Level Test</h3>
+                    <button class="btn btn-secondary" onclick="app.goToPage('levelTest')">Start Level Test →</button>
+                </div>
+            </div>
+        `;
+    },
+
+    // Level Test
+    renderLevelTest() {
+        const container = document.getElementById('levelTestContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="level-test">
+                <h2>English Level Test 📝</h2>
+                <p>Answer 10 questions to determine your level</p>
+                <div id="testQuestions"></div>
+            </div>
+        `;
+        
+        const questionsContainer = document.getElementById('testQuestions');
+        questionsContainer.innerHTML = this.content.levelTestQuestions.map((q, i) => `
+            <div class="test-question">
+                <h4>Question ${i + 1}: ${q.text}</h4>
+                ${q.options.map((opt, idx) => `
+                    <label class="radio-option">
+                        <input type="radio" name="q${i}" value="${idx}">
+                        <span>${opt}</span>
+                    </label>
+                `).join('')}
+            </div>
+        `).join('');
+        
+        questionsContainer.innerHTML += `<button class="btn btn-primary" onclick="app.submitLevelTest()">Submit & Get Results</button>`;
+    },
+
+    submitLevelTest() {
+        const answers = [];
+        const correct = [];
+        
+        this.content.levelTestQuestions.forEach((q, i) => {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected) {
+                answers.push(parseInt(selected.value));
+                if (parseInt(selected.value) === q.correct) correct.push(true);
+            }
+        });
+        
+        const percentage = (correct.length / answers.length) * 100;
+        let level = 'A1';
+        if (percentage >= 80) level = 'C2';
+        else if (percentage >= 70) level = 'C1';
+        else if (percentage >= 60) level = 'B2';
+        else if (percentage >= 50) level = 'B1';
+        else if (percentage >= 40) level = 'A2';
+        
+        this.userData.testedLevel = level;
+        this.userData.currentLevel = level;
+        this.saveData();
+        alert(`Test Complete! Your level: ${level} (${Math.round(percentage)}% correct)`);
+    },
+
+    // Goals
+    renderGoals() {
+        const container = document.getElementById('goalsContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="goals-page">
+                <h2>Your Learning Goals 🎯</h2>
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <h3>Words Per Day</h3>
+                        <input type="number" id="wordsPerDay" value="${this.userData.goals.wordsPerDay}" min="1" max="50">
+                        <button class="btn btn-primary" onclick="app.updateGoal('wordsPerDay', document.getElementById('wordsPerDay').value)">Save</button>
+                    </div>
+                    <div class="goal-card">
+                        <h3>Minutes Per Day</h3>
+                        <input type="number" id="minutesPerDay" value="${this.userData.goals.minutesPerDay}" min="1" max="240">
+                        <button class="btn btn-primary" onclick="app.updateGoal('minutesPerDay', document.getElementById('minutesPerDay').value)">Save</button>
+                    </div>
+                    <div class="goal-card">
+                        <h3>Lessons Per Day</h3>
+                        <input type="number" id="lessonsPerDay" value="${this.userData.goals.lessonsPerDay}" min="1" max="20">
+                        <button class="btn btn-primary" onclick="app.updateGoal('lessonsPerDay', document.getElementById('lessonsPerDay').value)">Save</button>
+                    </div>
+                    <div class="goal-card">
+                        <h3>XP Per Day</h3>
+                        <input type="number" id="xpPerDay" value="${this.userData.goals.xpPerDay}" min="10" max="500">
+                        <button class="btn btn-primary" onclick="app.updateGoal('xpPerDay', document.getElementById('xpPerDay').value)">Save</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    updateGoal(goalType, value) {
+        const mapping = {
+            'wordsPerDay': 'wordsPerDay',
+            'minutesPerDay': 'minutesPerDay',
+            'lessonsPerDay': 'lessonsPerDay',
+            'xpPerDay': 'xpPerDay'
+        };
+        this.userData.goals[mapping[goalType]] = parseInt(value);
+        this.saveData();
+        alert('Goal updated!');
+    },
+
+    // Calendar
+    renderCalendar() {
+        const container = document.getElementById('calendarContainer');
+        if (!container) return;
+        
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth();
+        
+        let html = `
+            <div class="calendar-page">
+                <h2>Study Calendar 📅</h2>
+                <div class="calendar-header">${new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' })}</div>
+                <div class="calendar-grid">
+        `;
+        
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        for (let i = 0; i < firstDay; i++) {
+            html += '<div class="calendar-empty"></div>';
+        }
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateStr = `${year}-${month + 1}-${day}`;
+            const studied = this.userData.studyCalendar[dateStr] ? '✓' : '';
+            html += `<div class="calendar-day ${studied ? 'studied' : ''}">${day}${studied}</div>`;
+        }
+        
+        html += `</div></div>`;
+        container.innerHTML = html;
+    },
+
+    // Statistics
+    renderStatistics() {
+        const container = document.getElementById('statisticsContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="statistics-page">
+                <h2>Your Statistics 📊</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <h3>Total XP</h3>
+                        <p class="stat-value">${this.userData.xp}</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Current Streak</h3>
+                        <p class="stat-value">${this.userData.streak} days</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Lessons Completed</h3>
+                        <p class="stat-value">${this.userData.lessonsCompleted}</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Words Learned</h3>
+                        <p class="stat-value">${this.userData.wordsLearned}</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Minutes Studied</h3>
+                        <p class="stat-value">${this.userData.minutesStudied}</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Current Level</h3>
+                        <p class="stat-value">${this.userData.currentLevel}</p>
+                    </div>
+                </div>
+                <div class="progress-chart">
+                    <h3>Weekly Progress</h3>
+                    <p>Check back daily for updated charts!</p>
+                </div>
+            </div>
+        `;
+    },
+
+    // Learning Path
+    renderLearningPath() {
+        const container = document.getElementById('learningPathContainer');
+        if (!container) return;
+        
+        const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+        const levelDescriptions = {
+            'A1': 'Elementary',
+            'A2': 'Pre-Intermediate',
+            'B1': 'Intermediate',
+            'B2': 'Upper-Intermediate',
+            'C1': 'Advanced',
+            'C2': 'Mastery'
+        };
+        
+        let html = '<div class="learning-path"><h2>Learning Path 🎯</h2><div class="path-progress">';
+        levels.forEach(level => {
+            const isReached = ['A1', 'A2', 'B1'].includes(level);
+            const isCurrent = level === this.userData.currentLevel;
+            html += `
+                <div class="path-item ${isReached ? 'completed' : ''} ${isCurrent ? 'current' : ''}">
+                    <div class="path-level">${level}</div>
+                    <div class="path-desc">${levelDescriptions[level]}</div>
+                </div>
+            `;
+        });
+        html += '</div></div>';
+        container.innerHTML = html;
+    },
+
+    // Flashcards
+    renderFlashcards() {
+        const container = document.getElementById('flashcardsContainer');
+        if (!container) return;
+        
+        const cards = this.content.vocabulary.slice(0, 6).map(vocab => ({
+            word: vocab.word,
+            translation: vocab.translation,
+            example: vocab.example
+        }));
+        
+        container.innerHTML = `
+            <div class="flashcards-page">
+                <h2>Flashcards 📇</h2>
+                <div class="flashcard-deck">
+                    ${cards.map((card, i) => `
+                        <div class="flashcard" onclick="app.flipCard(this)">
+                            <div class="flashcard-inner">
+                                <div class="flashcard-front"><strong>${card.word}</strong></div>
+                                <div class="flashcard-back">${card.translation}<br><em>${card.example}</em></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    flipCard(element) {
+        element.classList.toggle('flipped');
+    },
+
+    // Pronunciation Trainer
+    renderPronounceTrainer() {
+        const container = document.getElementById('pronunciationTrainerContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="pronunciation-trainer">
+                <div class="trainer-phrases">
+                    ${['The', 'This', 'That', 'There', 'Weather', 'With', 'Think', 'Three', 'Through', 'Thursday']
+                        .map(phrase => `
+                            <div class="phrase-item">
+                                <span class="phrase-text">${phrase}</span>
+                                <button class="audio-btn" onclick="app.playAudio('${phrase}')">🔊 Listen</button>
+                            </div>
+                        `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    // Conversation Simulation
+    renderConversation() {
+        const container = document.getElementById('conversationContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="conversation-page">
+                <h2>Conversation Practice 💬</h2>
+                <div class="scenarios-list">
+                    ${this.content.conversationScenarios.map(scenario => `
+                        <div class="scenario-card" onclick="app.showConversation('${scenario.id}')">
+                            <h3>${scenario.title}</h3>
+                            <button class="btn btn-secondary">Practice</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    showConversation(scenarioId) {
+        const scenario = this.content.conversationScenarios.find(s => s.id === scenarioId);
+        if (!scenario) return;
+        
+        const modal = document.getElementById('contentModal');
+        const body = document.getElementById('modalBody');
+        
+        body.innerHTML = `
+            <h3>${scenario.title}</h3>
+            <div class="dialogue-box">
+                ${scenario.lines.map(line => `
+                    <div class="dialogue-line ${line.speaker === 'You' ? 'user' : 'other'}">
+                        <strong>${line.speaker}:</strong> ${line.text}
+                    </div>
+                `).join('')}
+            </div>
+            <button class="btn btn-primary" onclick="app.closeModal()">Close</button>
+        `;
+        modal.classList.add('active');
+    },
+
+    // Journal
+    renderJournal() {
+        const container = document.getElementById('journalContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="journal-page">
+                <h2>English Journal 📝</h2>
+                <div class="journal-form">
+                    <textarea id="journalInput" placeholder="Write something in English..."></textarea>
+                    <button class="btn btn-primary" onclick="app.saveJournalEntry()">Save Entry</button>
+                </div>
+                <div class="journal-entries">
+                    <h3>Previous Entries</h3>
+                    ${this.userData.journalEntries.map((entry, i) => `
+                        <div class="entry-item">
+                            <p class="entry-date">${entry.date}</p>
+                            <p class="entry-text">${entry.text}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    saveJournalEntry() {
+        const text = document.getElementById('journalInput').value.trim();
+        if (text) {
+            this.userData.journalEntries.push({
+                date: new Date().toLocaleDateString(),
+                text: text
+            });
+            this.saveData();
+            this.renderJournal();
+            alert('Entry saved!');
+        }
+    },
+
+    // English Varieties
+    renderEnglishVarieties() {
+        const container = document.getElementById('varietiesContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="varieties-page">
+                <h2>English Varieties 🌍</h2>
+                <table class="varieties-table">
+                    <tr>
+                        <th>Word</th>
+                        <th>American</th>
+                        <th>British</th>
+                        <th>Canadian</th>
+                        <th>Australian</th>
+                    </tr>
+                    ${this.content.englishVarieties.map(v => `
+                        <tr>
+                            <td>${v.word}</td>
+                            <td>${v.american}</td>
+                            <td>${v.british}</td>
+                            <td>${v.canadian}</td>
+                            <td>${v.australian}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+            </div>
+        `;
+    },
+
+    // Why Explanations
+    renderWhy() {
+        const container = document.getElementById('whyContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="why-page">
+                <h2>Why Explanations ❓</h2>
+                <div class="faq-list">
+                    ${this.content.whyExplanations.map(item => `
+                        <div class="faq-item">
+                            <h4>${item.question}</h4>
+                            <p>${item.answer}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    // Error Notebook
+    renderErrorNotebook() {
+        const container = document.getElementById('errorNotebookContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="error-notebook">
+                <h2>Error Notebook 📋</h2>
+                <div class="errors-list">
+                    ${this.userData.errorLog.length > 0 
+                        ? this.userData.errorLog.map(err => `
+                            <div class="error-item">
+                                <h4>${err.question}</h4>
+                                <p><strong>Your answer:</strong> ${err.userAnswer}</p>
+                                <p><strong>Correct:</strong> ${err.correct}</p>
+                                <p><strong>Date:</strong> ${err.date}</p>
+                            </div>
+                        `).join('')
+                        : '<p>No errors recorded yet</p>'
+                    }
+                </div>
+            </div>
+        `;
+    },
+
+    // Library
+    renderLibrary() {
+        const container = document.getElementById('libraryContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="library-page">
+                <h2>Reading Library 📚</h2>
+                <div class="library-grid">
+                    ${this.content.libraryContent.map(item => `
+                        <div class="library-item">
+                            <h4>${item.title}</h4>
+                            <p class="item-level">${item.level}</p>
+                            <p class="item-type">${item.type}</p>
+                            <button class="btn btn-secondary" onclick="app.openLibraryItem('${item.id}')">Read</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    openLibraryItem(itemId) {
+        const item = this.content.libraryContent.find(i => i.id === itemId);
+        if (item) {
+            alert(`Opening: ${item.title}\n\n${item.content}`);
+        }
+    },
+
+    // Stories
+    renderStories() {
+        const container = document.getElementById('storiesContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="stories-page">
+                <h2>Interactive Stories 📖</h2>
+                <div class="stories-list">
+                    <div class="story-item" onclick="app.startStory('frog')">
+                        <h3>The Frog Prince</h3>
+                        <p>A classic fairy tale retold for English learners</p>
+                        <button class="btn btn-secondary">Read Story</button>
+                    </div>
+                    <div class="story-item" onclick="app.startStory('dragon')">
+                        <h3>The Dragon's Gold</h3>
+                        <p>An adventure story with choices</p>
+                        <button class="btn btn-secondary">Read Story</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    startStory(storyId) {
+        alert(`Story: ${storyId}\n\nComing soon - Interactive story reader with multiple endings!`);
+    },
+
+    // Games
+    renderGames() {
+        const container = document.getElementById('gamesContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="games-page">
+                <h2>Mini Games 🎮</h2>
+                <div class="games-grid">
+                    ${this.content.miniGames.map(game => `
+                        <div class="game-card" onclick="app.startGame('${game.type}')">
+                            <h3>${game.title}</h3>
+                            <p>${game.description}</p>
+                            <button class="btn btn-primary">Play</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    startGame(gameType) {
+        alert(`Starting ${gameType} game...`);
+    },
+
+    // Favorites
+    renderFavorites() {
+        const container = document.getElementById('favoritesContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="favorites-page">
+                <h2>Your Favorites ⭐</h2>
+                <div class="favorites-list">
+                    ${this.userData.favorites.length > 0
+                        ? this.userData.favorites.map(fav => `<div class="favorite-item">${fav}</div>`).join('')
+                        : '<p>No favorites yet. Click ⭐ to add!</p>'
+                    }
+                </div>
+            </div>
+        `;
+    },
+
+    // Ranking
+    renderRanking() {
+        const container = document.getElementById('rankingContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="ranking-page">
+                <h2>Local Ranking 🏆</h2>
+                <table class="ranking-table">
+                    <tr><th>Rank</th><th>Name</th><th>Level</th><th>XP</th></tr>
+                    <tr class="user-rank">
+                        <td>1</td>
+                        <td>${this.userData.name}</td>
+                        <td>${this.userData.currentLevel}</td>
+                        <td>${this.userData.xp}</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Alex</td>
+                        <td>B1</td>
+                        <td>2500</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Maria</td>
+                        <td>A2</td>
+                        <td>1800</td>
+                    </tr>
+                </table>
+            </div>
+        `;
+    },
+
+    // Helper: Set Goal
+    setGoal(goal) {
+        alert(`Goal set: ${goal}`);
     },
 
     // Update Dashboard
