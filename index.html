@@ -1,241 +1,463 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>/fala/ — Pratique inglês em voz alta</title>
+<title>GoEnglish — Learn English. Speak with confidence.</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[--paper] text-[--ink] antialiased">
+<body class="antialiased">
 
-<!-- ================= HEADER ================= -->
-<header class="sticky top-0 z-40 bg-[--paper]/90 backdrop-blur border-b border-[--ink]/10">
-  <div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between h-16">
-    <a href="#top" class="flex items-center gap-2 group">
-      <span class="font-mono text-[--amber] text-lg">/</span>
-      <span class="font-display font-semibold text-xl tracking-tight">fala</span>
-      <span class="font-mono text-[--amber] text-lg">/</span>
+<!-- ================= NAVBAR ================= -->
+<header id="navbar" class="sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 h-[68px] flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 shrink-0">
+      <span class="w-8 h-8 rounded-lg bg-gradient flex items-center justify-center font-display font-extrabold text-sm text-white">Go</span>
+      <span class="font-display font-extrabold text-lg tracking-tight">GoEnglish</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-[--ink]/70">
-      <a href="#vocabulario" class="hover:text-[--ink] transition-colors">Vocabulário</a>
-      <a href="#palavras" class="hover:text-[--ink] transition-colors">Palavras &amp; números</a>
-      <a href="#laboratorio" class="hover:text-[--ink] transition-colors">Laboratório de fala</a>
-      <a href="#progresso" class="hover:text-[--ink] transition-colors">Progresso</a>
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+      <a href="#top" class="nav-link">Home</a>
+      <a href="#journey" class="nav-link">Lessons</a>
+      <a href="#categories" class="nav-link">Vocabulary</a>
+      <a href="#categories" class="nav-link">Grammar</a>
+      <a href="#daily" class="nav-link">Pronunciation</a>
+      <a href="#practice" class="nav-link">Practice</a>
     </nav>
 
-    <div class="flex items-center gap-1">
-      <button id="theme-toggle" aria-label="Alternar modo escuro" class="w-9 h-9 rounded-full flex items-center justify-center text-lg hover:bg-[--ink]/5 transition-colors">
-        <span id="theme-icon">🌙</span>
+    <div class="flex items-center gap-2">
+      <button id="search-btn" aria-label="Search" class="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-[--text-muted] hover:text-[--text] transition-colors">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       </button>
-      <button id="menu-btn" aria-label="Abrir menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5">
+      <button id="theme-toggle" aria-label="Toggle theme" class="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-[--text-muted] hover:text-[--text] transition-colors">
+        <span id="theme-icon">☀️</span>
+      </button>
+      <a href="#" class="hidden sm:inline-block text-sm font-medium text-[--text-muted] hover:text-[--text] px-3 py-2 transition-colors">Log in</a>
+      <a href="#top" class="btn-primary hidden sm:inline-block text-sm font-semibold px-4 py-2.5 rounded-full">Start Learning</a>
+      <button id="menu-btn" aria-label="Open menu" aria-expanded="false" class="lg:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5">
         <span class="bar bar-top block w-5 h-[2px]"></span>
         <span class="bar bar-mid block w-5 h-[2px]"></span>
         <span class="bar bar-bottom block w-5 h-[2px]"></span>
       </button>
     </div>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden border-t border-[--ink]/10 bg-[--paper]">
-    <div class="px-5 py-3 flex flex-col gap-1 font-medium text-sm">
-      <a href="#vocabulario" class="mobile-link py-2">Vocabulário</a>
-      <a href="#palavras" class="mobile-link py-2">Palavras &amp; números</a>
-      <a href="#laboratorio" class="mobile-link py-2">Laboratório de fala</a>
-      <a href="#progresso" class="mobile-link py-2">Progresso</a>
+
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-[--border]" style="background: var(--bg);">
+    <div class="px-5 py-3 flex flex-col text-sm font-medium">
+      <a href="#top" class="mobile-link py-3">Home</a>
+      <a href="#journey" class="mobile-link py-3">Lessons</a>
+      <a href="#categories" class="mobile-link py-3">Vocabulary</a>
+      <a href="#categories" class="mobile-link py-3">Grammar</a>
+      <a href="#daily" class="mobile-link py-3">Pronunciation</a>
+      <a href="#practice" class="mobile-link py-3">Practice</a>
+      <a href="#" class="mobile-link py-3">Log in</a>
+      <a href="#top" class="btn-primary text-center font-semibold px-4 py-2.5 rounded-full mt-3">Start Learning</a>
     </div>
   </div>
 </header>
 
 <!-- ================= HERO ================= -->
-<section id="top" class="relative overflow-hidden border-b border-[--ink]/10">
-  <div class="max-w-6xl mx-auto px-5 md:px-8 pt-16 pb-14 md:pt-24 md:pb-20 grid md:grid-cols-[1.3fr_1fr] gap-10 items-center">
+<section id="top" class="relative overflow-hidden">
+  <div class="hero-glow" style="top: -220px; left: -180px;"></div>
+  <div class="max-w-7xl mx-auto px-5 md:px-8 pt-14 pb-20 md:pt-20 md:pb-28 grid lg:grid-cols-[1.05fr_1fr] gap-14 items-center relative">
+
     <div>
-      <p class="font-mono text-xs tracking-[0.2em] uppercase text-[--teal]">/ english by ear /</p>
-      <h1 class="font-display font-semibold text-[2.6rem] leading-[1.05] md:text-6xl mt-4 text-[--ink]">
-        Ouça o som. <br> <span class="italic font-normal text-[--amber]">Repita</span> em voz alta.
+      <h1 class="hero-enter d1 font-display font-extrabold text-[2.6rem] leading-[1.08] sm:text-5xl md:text-[3.4rem] md:leading-[1.08] tracking-tight">
+        Learn English.<br>Speak with confidence.
       </h1>
-      <p class="text-[--ink]/60 text-lg mt-5 max-w-md">
-        Um jeito curto de treinar pronúncia: você ouve a frase, fala de volta,
-        e o navegador te diz o quanto chegou perto.
+      <p class="hero-enter d2 text-[--text-muted] text-lg mt-5 max-w-md leading-relaxed">
+        Improve your English with practical lessons, everyday vocabulary, pronunciation and real conversations.
       </p>
-      <div class="flex flex-wrap gap-3 mt-8">
-        <a href="#vocabulario" class="px-5 py-3 rounded-full bg-[--ink] text-[--paper] font-medium text-sm hover:bg-[--teal] transition-colors">Ver vocabulário</a>
-        <a href="#laboratorio" class="px-5 py-3 rounded-full border border-[--ink]/20 font-medium text-sm hover:border-[--ink]/50 transition-colors">Ir para o laboratório →</a>
+      <div class="hero-enter d3 flex flex-wrap gap-3 mt-8">
+        <a href="#practice" class="btn-primary px-6 py-3.5 rounded-full font-semibold text-sm">Start Learning</a>
+        <a href="#categories" class="btn-secondary px-6 py-3.5 rounded-full font-semibold text-sm">Explore Lessons</a>
+      </div>
+
+      <div class="hero-enter d4 flex items-center gap-6 mt-10 text-sm text-[--text-muted]">
+        <div class="flex items-center gap-2">
+          <span class="font-display font-extrabold text-[--text] text-lg">40k+</span> students learning
+        </div>
+        <div class="w-px h-8 bg-[--border]"></div>
+        <div class="flex items-center gap-2">
+          <span class="font-display font-extrabold text-[--text] text-lg">4.9</span> average rating
+        </div>
       </div>
     </div>
 
-    <!-- waveform signature -->
-    <div class="hero-wave-panel relative h-40 md:h-56 p-5 flex flex-col" aria-hidden="true">
-      <canvas id="hero-wave" class="flex-1 w-full"></canvas>
-      <p class="text-center font-mono text-sm text-[--ink]/40 mt-2">/həˈloʊ/ · /wɜːrk/ · /kɔːfi/</p>
-    </div>
-  </div>
-</section>
+    <!-- illustration -->
+    <div class="hero-enter d3 relative mx-auto w-full max-w-[420px]">
+      <div class="floating-chip c1">Hello! 👋</div>
+      <div class="floating-chip c2">How are you?</div>
+      <div class="floating-chip c3">Let's practice!</div>
+      <div class="floating-chip c4">I wanna learn English.</div>
 
-<!-- ================= VOCABULARIO ================= -->
-<section id="vocabulario" class="max-w-6xl mx-auto px-5 md:px-8 py-16">
-  <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
-    <div>
-      <p class="font-mono text-xs tracking-[0.2em] uppercase text-[--teal]">/ vocabulário /</p>
-      <h2 class="font-display font-semibold text-3xl mt-2">Frases para o dia a dia</h2>
-    </div>
-    <div class="relative w-full sm:w-64">
-      <input id="search-input" type="text" placeholder="Buscar frase ou tradução…"
-        class="w-full pl-10 pr-4 py-2.5 rounded-full border border-[--ink]/15 bg-[--paper] text-sm focus:outline-none focus:ring-2 focus:ring-[--teal]/40 focus:border-[--teal]">
-      <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[--ink]/30 font-mono text-sm">⌕</span>
-    </div>
-  </div>
-
-  <div class="flex flex-wrap gap-2 mb-4" id="category-filters">
-    <button data-category="todos" class="category-btn active px-4 py-2 rounded-full text-sm font-medium transition-colors">Todos</button>
-    <button data-category="cumprimentos" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Cumprimentos</button>
-    <button data-category="viagem" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Viagem</button>
-    <button data-category="comida" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Comida</button>
-    <button data-category="trabalho" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Trabalho</button>
-    <button data-category="social" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Social</button>
-    <button data-category="compras" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Compras</button>
-    <button data-category="emergencia" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Emergência</button>
-    <button data-category="saude" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Saúde</button>
-    <button data-category="casa" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Casa</button>
-    <button data-category="clima" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Clima</button>
-    <button data-category="numeros" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Números &amp; tempo</button>
-    <button data-category="direcoes" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Direções</button>
-    <button data-category="tecnologia" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Tecnologia</button>
-    <button data-category="sentimentos" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Sentimentos</button>
-    <button data-category="escola" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">Escola</button>
-  </div>
-  <div class="flex flex-wrap gap-2 mb-10">
-    <button id="favorites-toggle" class="chip-toggle px-3 py-1.5 rounded-full text-xs font-mono transition-colors">★ favoritas</button>
-    <button id="unmastered-toggle" class="chip-toggle px-3 py-1.5 rounded-full text-xs font-mono transition-colors">○ ainda não dominadas</button>
-  </div>
-
-  <div id="cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-  <p id="empty-state" class="hidden text-center text-[--ink]/40 py-16 font-mono text-sm">/ nenhuma frase encontrada /</p>
-</section>
-
-<!-- ================= PALAVRAS & NÚMEROS ================= -->
-<section id="palavras" class="max-w-6xl mx-auto px-5 md:px-8 py-16 border-t border-[--ink]/10">
-  <div class="mb-8 max-w-lg">
-    <p class="font-mono text-xs tracking-[0.2em] uppercase text-[--teal]">/ palavras &amp; números /</p>
-    <h2 class="font-display font-semibold text-3xl mt-2">Vocabulário essencial, cartão por cartão</h2>
-    <p class="text-[--ink]/60 mt-2">Números, cores, animais, família, dias da semana, verbos e objetos. Toque no cartão pra virar e ver a tradução, ou use os botões pra ouvir e praticar.</p>
-  </div>
-
-  <div class="flex flex-wrap gap-2 mb-8" id="word-category-filters">
-    <button data-wcategory="todos" class="wcategory-btn active px-4 py-2 rounded-full text-sm font-medium transition-colors">Todos</button>
-    <button data-wcategory="numeros" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🔢 Números</button>
-    <button data-wcategory="cores" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🎨 Cores</button>
-    <button data-wcategory="animais" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🐾 Animais</button>
-    <button data-wcategory="familia" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">👪 Família</button>
-    <button data-wcategory="dias" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">📅 Dias</button>
-    <button data-wcategory="verbos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🏃 Verbos</button>
-    <button data-wcategory="objetos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🪑 Objetos</button>
-    <button data-wcategory="adjetivos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">✨ Adjetivos</button>
-    <button data-wcategory="corpo" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🫀 Corpo</button>
-    <button data-wcategory="roupas" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">👕 Roupas</button>
-    <button data-wcategory="lugares" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🏙️ Lugares</button>
-    <button data-wcategory="meses" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">📆 Meses</button>
-    <button data-wcategory="transporte" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🚗 Transporte</button>
-    <button data-wcategory="profissoes" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">👷 Profissões</button>
-  </div>
-
-  <div id="words-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-</section>
-
-<!-- ================= LABORATORIO ================= -->
-<section id="laboratorio" class="border-y border-[--ink]/10 bg-[--panel] text-[--panel-fg]">
-  <div class="max-w-6xl mx-auto px-5 md:px-8 py-16">
-    <p class="font-mono text-xs tracking-[0.2em] uppercase text-[--amber]">/ laboratório de fala /</p>
-    <h2 class="font-display font-semibold text-3xl mt-2">Fale. Compare. Ajuste.</h2>
-    <p class="text-[--panel-fg]/60 mt-2 max-w-lg">Escolha uma frase, ouça o modelo nativo, depois grave sua voz para ver uma comparação palavra por palavra.</p>
-
-    <div class="grid md:grid-cols-[1fr_1fr] gap-8 mt-10">
-      <!-- controls -->
-      <div class="bg-[--panel-fg]/[0.06] border border-[--panel-fg]/15 rounded-2xl p-6">
-        <label for="lesson-select" class="text-xs font-mono uppercase tracking-wider text-[--panel-fg]/50">Escolha uma frase</label>
-        <select id="lesson-select" class="w-full mt-2 bg-[--panel-fg]/10 border border-[--panel-fg]/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[--amber]/50"></select>
-
-        <label for="target-phrase" class="text-xs font-mono uppercase tracking-wider text-[--panel-fg]/50 mt-5 block">…ou digite a sua</label>
-        <input id="target-phrase" type="text" value="Hello"
-          class="w-full mt-2 bg-[--panel-fg]/10 border border-[--panel-fg]/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[--amber]/50" />
-        <p id="target-phonetic" class="font-mono text-xs text-[--amber] mt-2 h-4"></p>
-
-        <div class="flex items-center justify-between mt-5">
-          <label class="text-xs font-mono uppercase tracking-wider text-[--panel-fg]/50">Velocidade da voz</label>
-          <div class="flex gap-1 bg-[--panel-fg]/10 rounded-full p-1">
-            <button data-rate="0.7" class="rate-btn px-3 py-1 rounded-full text-xs font-medium">Lento</button>
-            <button data-rate="0.9" class="rate-btn active px-3 py-1 rounded-full text-xs font-medium">Normal</button>
-            <button data-rate="1.1" class="rate-btn px-3 py-1 rounded-full text-xs font-medium">Rápido</button>
+      <div class="hero-illustration p-5">
+        <div class="mock-topbar flex items-center gap-1.5 mb-4">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+          <p class="font-display font-bold text-sm">Today's lesson</p>
+          <span class="text-xs font-semibold text-[--purple-soft] bg-[--surface-2] px-2.5 py-1 rounded-full">Conversation</span>
+        </div>
+        <div class="flex flex-col gap-2 mb-5">
+          <div class="mock-bubble them">Can I get a coffee, please?</div>
+          <div class="mock-bubble me">Sure! What size would you like?</div>
+        </div>
+        <div class="surface-soft rounded-xl p-3.5">
+          <div class="flex items-center justify-between text-xs mb-2">
+            <span class="text-[--text-muted]">Lesson progress</span>
+            <span class="font-semibold">72%</span>
+          </div>
+          <div class="mock-progress-track">
+            <div class="mock-progress-fill" style="width: 72%;"></div>
           </div>
         </div>
-
-        <div id="mic-permission-banner" class="hidden mt-5 items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-xs font-mono">
-          <span id="mic-permission-text">🎙️ Precisamos da permissão do microfone para te ouvir.</span>
-          <button id="mic-permission-btn" class="underline underline-offset-2 shrink-0">permitir</button>
-        </div>
-
-        <div class="flex flex-wrap gap-3 mt-6">
-          <button id="listen-target-btn" class="flex-1 min-w-[140px] bg-[--panel-fg] text-[--panel] font-semibold text-sm px-4 py-3 rounded-xl hover:bg-[--panel-fg]/90 transition-colors">🔊 Ouvir modelo</button>
-          <button id="start-record-btn" class="flex-1 min-w-[140px] bg-[--amber] text-[--panel] font-semibold text-sm px-4 py-3 rounded-xl hover:brightness-95 transition-all select-none" style="touch-action: none;">🎤 Segure para falar</button>
-        </div>
-        <p class="text-xs font-mono text-[--panel-fg]/40 mt-2 text-center">segure o botão e fale, solte para ver o resultado</p>
-        <button id="random-phrase-btn" class="w-full mt-3 text-xs font-mono text-[--panel-fg]/50 hover:text-[--panel-fg]/80 transition-colors">🎲 surpreenda-me com outra frase</button>
       </div>
+    </div>
 
-      <!-- feedback -->
+  </div>
+</section>
+
+<!-- ================= YOUR ENGLISH JOURNEY ================= -->
+<section id="journey" class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
+  <div class="flex flex-wrap items-end justify-between gap-6 mb-10">
+    <div>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Your English Journey</h2>
+      <p class="text-[--text-muted] mt-2 max-w-md">Track how far you've come, one lesson at a time.</p>
+    </div>
+    <div class="flex gap-1 surface-soft rounded-full p-1" id="level-switcher">
+      <button data-level="beginner" class="level-btn active px-4 py-2 rounded-full text-sm font-semibold">Beginner</button>
+      <button data-level="intermediate" class="level-btn px-4 py-2 rounded-full text-sm font-semibold">Intermediate</button>
+      <button data-level="advanced" class="level-btn px-4 py-2 rounded-full text-sm font-semibold">Advanced</button>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-[1fr_1.2fr] gap-6">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="stat-pill p-5">
+        <p class="font-display font-extrabold text-3xl" id="stat-lessons">86</p>
+        <p class="text-sm text-[--text-muted] mt-1">Lessons completed</p>
+      </div>
+      <div class="stat-pill p-5">
+        <p class="font-display font-extrabold text-3xl" id="stat-words">512</p>
+        <p class="text-sm text-[--text-muted] mt-1">Words learned</p>
+      </div>
+      <div class="stat-pill p-5">
+        <p class="font-display font-extrabold text-3xl" id="stat-streak">14</p>
+        <p class="text-sm text-[--text-muted] mt-1">Day streak</p>
+      </div>
+      <div class="stat-pill p-5">
+        <p class="font-display font-extrabold text-3xl" id="stat-percent">63%</p>
+        <p class="text-sm text-[--text-muted] mt-1">Level progress</p>
+      </div>
+    </div>
+
+    <div class="surface rounded-2xl p-6 flex flex-col justify-center gap-5">
+      <div class="progress-row">
+        <div class="flex items-center justify-between text-sm mb-2">
+          <span class="font-medium">Vocabulary</span>
+          <span class="text-[--text-muted]" data-value="80">80%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="flex items-center justify-between text-sm mb-2">
+          <span class="font-medium">Grammar</span>
+          <span class="text-[--text-muted]" data-value="55">55%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" data-width="55"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="flex items-center justify-between text-sm mb-2">
+          <span class="font-medium">Pronunciation</span>
+          <span class="text-[--text-muted]" data-value="47">47%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" data-width="47"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="flex items-center justify-between text-sm mb-2">
+          <span class="font-medium">Conversation</span>
+          <span class="text-[--text-muted]" data-value="65">65%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" data-width="65"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+<section id="categories" class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
+  <div class="max-w-lg mb-10">
+    <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Everything you need to learn</h2>
+    <p class="text-[--text-muted] mt-2">Five focused paths, so you always know what to study next.</p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="category-card p-6">
+      <div class="category-icon mb-5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h3 class="font-display font-bold text-lg">Vocabulary</h3>
+      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Learn useful words and expressions for everyday situations.</p>
+      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
+    </div>
+
+    <div class="category-card p-6">
+      <div class="category-icon mb-5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+      </div>
+      <h3 class="font-display font-bold text-lg">Grammar</h3>
+      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Understand English grammar through simple, practical rules.</p>
+      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
+    </div>
+
+    <div class="category-card p-6">
+      <div class="category-icon mb-5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3M8 22h8"/><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/></svg>
+      </div>
+      <h3 class="font-display font-bold text-lg">Pronunciation</h3>
+      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Improve your pronunciation and train your listening ear.</p>
+      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
+    </div>
+
+    <div class="category-card p-6">
+      <div class="category-icon mb-5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3 class="font-display font-bold text-lg">Conversation</h3>
+      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Practice real-world conversations with guided dialogues.</p>
+      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
+    </div>
+
+    <div class="category-card p-6">
+      <div class="category-icon mb-5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <h3 class="font-display font-bold text-lg">Everyday English</h3>
+      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Learn the expressions native speakers actually use.</p>
+      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
+    </div>
+
+    <a href="#practice" class="category-card p-6 flex flex-col justify-between" style="background: var(--gradient-soft);">
       <div>
-        <div id="feedback-container" class="hidden p-5 rounded-2xl text-left border">
-          <p class="text-xs font-mono uppercase tracking-wider text-[--ink]/40 mb-1">Você disse</p>
-          <p id="recognized-text" class="text-lg font-medium mb-3"></p>
-          <p id="feedback-message" class="font-bold mb-3"></p>
-          <div id="diff-output" class="flex flex-wrap gap-1.5 font-mono text-sm"></div>
-        </div>
-        <div id="feedback-placeholder" class="p-5 rounded-2xl border border-dashed border-[--panel-fg]/20 text-[--panel-fg]/40 text-sm h-full flex flex-col items-center justify-center min-h-[160px] gap-3">
-          <canvas id="mic-visualizer" class="w-full h-16 hidden"></canvas>
-          <span id="feedback-placeholder-text">Sua comparação vai aparecer aqui.</span>
-        </div>
+        <h3 class="font-display font-bold text-lg">Practice everything</h3>
+        <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Mix it all together with quizzes, exercises and daily goals.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Go to practice</span>
+    </a>
+  </div>
+</section>
 
-        <!-- histórico de tentativas -->
-        <div class="mt-4">
-          <p class="text-xs font-mono uppercase tracking-wider text-[--panel-fg]/40 mb-2">Últimas tentativas</p>
-          <ul id="attempt-history" class="flex flex-col gap-1.5 text-sm font-mono text-[--panel-fg]/60">
-            <li class="text-[--panel-fg]/30">— nenhuma tentativa ainda —</li>
-          </ul>
+<!-- ================= ENGLISH IN REAL LIFE ================= -->
+<section class="border-y border-[--border]" style="background: var(--bg-soft);">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center reveal">
+    <div>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">English in real life</h2>
+      <p class="text-[--text-muted] mt-3 max-w-md leading-relaxed">
+        Textbook English only gets you so far. These are the exact lines people use in real situations — with the Portuguese meaning right below, so nothing gets lost.
+      </p>
+      <a href="#" class="btn-primary inline-block px-6 py-3.5 rounded-full font-semibold text-sm mt-7">Practice Conversation</a>
+    </div>
+
+    <div class="conversation-panel p-6 md:p-7">
+      <p class="text-xs font-semibold text-[--purple-soft] mb-5">At a Restaurant</p>
+      <div class="flex flex-col gap-4">
+        <div>
+          <div class="mock-bubble them">"Can I get a pizza, please?"</div>
+          <p class="pt-translation mt-1.5 ml-1">Posso pedir uma pizza, por favor?</p>
+        </div>
+        <div>
+          <div class="mock-bubble me">"Sure! What flavor would you like?"</div>
+          <p class="pt-translation mt-1.5 mr-1 text-right">Claro! Qual sabor você gostaria?</p>
+        </div>
+        <div>
+          <div class="mock-bubble them">"I'll have a pepperoni, please."</div>
+          <p class="pt-translation mt-1.5 ml-1">Vou querer uma de pepperoni, por favor.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= PROGRESSO ================= -->
-<section id="progresso" class="max-w-6xl mx-auto px-5 md:px-8 py-16">
-  <p class="font-mono text-xs tracking-[0.2em] uppercase text-[--teal]">/ progresso /</p>
-  <h2 class="font-display font-semibold text-3xl mt-2 mb-8">Seu histórico nesta sessão</h2>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="stat-card">
-      <p class="font-display text-4xl font-semibold" id="stat-attempts">0</p>
-      <p class="text-xs font-mono uppercase tracking-wider text-[--ink]/40 mt-1">Tentativas</p>
+<!-- ================= ENGLISH OF THE DAY ================= -->
+<section id="daily" class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
+  <div class="grid lg:grid-cols-[1fr_1.3fr] gap-10 items-center">
+    <div>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">English of the day</h2>
+      <p class="text-[--text-muted] mt-3 max-w-sm leading-relaxed">One small expression, every day. Enough to remember, not enough to overwhelm.</p>
     </div>
-    <div class="stat-card">
-      <p class="font-display text-4xl font-semibold" id="stat-accuracy">—</p>
-      <p class="text-xs font-mono uppercase tracking-wider text-[--ink]/40 mt-1">Precisão média</p>
-    </div>
-    <div class="stat-card">
-      <p class="font-display text-4xl font-semibold" id="stat-streak">0</p>
-      <p class="text-xs font-mono uppercase tracking-wider text-[--ink]/40 mt-1">Sequência atual</p>
-    </div>
-    <div class="stat-card">
-      <p class="font-display text-4xl font-semibold" id="stat-learned">0</p>
-      <p class="text-xs font-mono uppercase tracking-wider text-[--ink]/40 mt-1">Frases dominadas</p>
+
+    <div class="daily-card p-7 md:p-8 flex items-center gap-6">
+      <button id="daily-audio-btn" class="audio-btn" aria-label="Play pronunciation">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="min-w-0">
+        <div class="flex items-baseline gap-3 flex-wrap">
+          <p class="font-display font-extrabold text-2xl">Wanna</p>
+          <span class="text-sm font-mono text-[--text-faint]">/ˈwɒnə/</span>
+        </div>
+        <p class="text-sm text-[--text-muted] mt-0.5">Short for "want to"</p>
+        <p class="mt-4 text-[--text]">"Do you <span class="text-gradient font-semibold">wanna</span> go?"</p>
+        <p class="text-sm text-[--text-faint] mt-1">Você quer ir?</p>
+      </div>
     </div>
   </div>
-  <button id="reset-progress-btn" class="mt-6 text-sm font-mono text-[--ink]/40 hover:text-[--ink]/70 underline underline-offset-4">reiniciar progresso</button>
 </section>
 
-<footer class="border-t border-[--ink]/10 py-8 text-center text-xs font-mono text-[--ink]/40">
-  / fala / — treine o ouvido, treine a boca.
+<!-- ================= PRACTICE / GAMIFICATION ================= -->
+<section id="practice" class="border-y border-[--border]" style="background: var(--bg-soft);">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-10">
+      <div>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Practice keeps it in your head</h2>
+        <p class="text-[--text-muted] mt-2 max-w-md">Short daily exercises, quizzes and a streak worth keeping.</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 stat-pill px-4 py-2.5">
+          <span class="text-[--purple-soft] font-display font-extrabold">2,340</span>
+          <span class="text-sm text-[--text-muted]">XP</span>
+        </div>
+        <div class="flex items-center gap-2 stat-pill px-4 py-2.5">
+          <span>🔥</span>
+          <span class="font-display font-extrabold">14</span>
+          <span class="text-sm text-[--text-muted]">days</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-[0.9fr_1.4fr] gap-6">
+      <!-- daily goal -->
+      <div class="surface rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+        <div class="goal-ring" id="goal-ring">
+          <div class="goal-ring-inner"><span id="goal-ring-text">70%</span></div>
+        </div>
+        <p class="font-semibold mt-4">Daily goal</p>
+        <p class="text-sm text-[--text-muted] mt-1">14 / 20 XP today</p>
+      </div>
+
+      <!-- quiz -->
+      <div class="surface rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-5">
+          <p class="font-semibold">Quick quiz</p>
+          <span class="text-xs font-semibold text-[--purple-soft] bg-[--surface-2] px-2.5 py-1 rounded-full">Vocabulary</span>
+        </div>
+        <p class="mb-4">What does <span class="font-semibold text-gradient">"gonna"</span> mean?</p>
+        <div class="grid sm:grid-cols-3 gap-3" id="quiz-options">
+          <button class="quiz-option rounded-xl px-4 py-3 text-sm font-medium text-left" data-correct="false">Going to work</button>
+          <button class="quiz-option rounded-xl px-4 py-3 text-sm font-medium text-left" data-correct="true">Going to</button>
+          <button class="quiz-option rounded-xl px-4 py-3 text-sm font-medium text-left" data-correct="false">Want a</button>
+        </div>
+        <p id="quiz-feedback" class="text-sm mt-4 h-5"></p>
+      </div>
+    </div>
+
+    <!-- achievements -->
+    <div class="mt-6 surface rounded-2xl p-6">
+      <p class="font-semibold mb-4">Achievements</p>
+      <div class="flex flex-wrap gap-3">
+        <div class="achievement unlocked" title="7-day streak">🔥</div>
+        <div class="achievement unlocked" title="First 100 words">📚</div>
+        <div class="achievement unlocked" title="Perfect quiz">🎯</div>
+        <div class="achievement locked" title="30-day streak">🏆</div>
+        <div class="achievement locked" title="Conversation master">💬</div>
+        <div class="achievement locked" title="Grammar pro">🧠</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
+  <div class="max-w-lg mb-10">
+    <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Students who kept going</h2>
+    <p class="text-[--text-muted] mt-2">Small daily lessons, real progress.</p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="testimonial-card p-6">
+      <p class="text-[--text] leading-relaxed">"I finally understand how to use 'gonna' and 'wanna' in real conversations, not just in theory."</p>
+      <div class="flex items-center gap-3 mt-5">
+        <div class="avatar-dot">MC</div>
+        <div>
+          <p class="font-semibold text-sm">Marina Costa</p>
+          <p class="text-xs text-[--text-muted]">Beginner → Intermediate</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card p-6">
+      <p class="text-[--text] leading-relaxed">"The pronunciation lessons made the biggest difference. I can finally follow podcasts without subtitles."</p>
+      <div class="flex items-center gap-3 mt-5">
+        <div class="avatar-dot">RA</div>
+        <div>
+          <p class="font-semibold text-sm">Rafael Almeida</p>
+          <p class="text-xs text-[--text-muted]">Intermediate</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card p-6">
+      <p class="text-[--text] leading-relaxed">"Ten minutes a day, no pressure. My streak is at 40 days and I actually look forward to it."</p>
+      <div class="flex items-center gap-3 mt-5">
+        <div class="avatar-dot">JS</div>
+        <div>
+          <p class="font-semibold text-sm">Julia Santos</p>
+          <p class="text-xs text-[--text-muted]">Advanced</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-[--border]">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+    <div>
+      <a href="#top" class="flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg bg-gradient flex items-center justify-center font-display font-extrabold text-sm text-white">Go</span>
+        <span class="font-display font-extrabold text-lg">GoEnglish</span>
+      </a>
+      <p class="text-sm text-[--text-muted] mt-4 max-w-xs leading-relaxed">Learn English. Speak with confidence.</p>
+      <div class="flex gap-2 mt-5">
+        <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+        <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" class="social-btn" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4c.5 2 2 4 5 4"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <p class="font-semibold text-sm mb-4">Platform</p>
+      <div class="flex flex-col gap-3 text-sm">
+        <a href="#" class="footer-link">About</a>
+        <a href="#journey" class="footer-link">Lessons</a>
+        <a href="#categories" class="footer-link">Vocabulary</a>
+        <a href="#categories" class="footer-link">Grammar</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="font-semibold text-sm mb-4">Company</p>
+      <div class="flex flex-col gap-3 text-sm">
+        <a href="#" class="footer-link">Contact</a>
+        <a href="#" class="footer-link">Careers</a>
+        <a href="#" class="footer-link">Blog</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="font-semibold text-sm mb-4">Legal</p>
+      <div class="flex flex-col gap-3 text-sm">
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-[--border]">
+    <p class="max-w-7xl mx-auto px-5 md:px-8 py-5 text-xs text-[--text-faint]">© 2026 GoEnglish. All rights reserved.</p>
+  </div>
 </footer>
 
 <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 items-end"></div>
