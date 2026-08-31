@@ -1,467 +1,475 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoEnglish — Learn English. Speak with confidence.</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoEnglish - Learn English from Zero to Native</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased">
+<body>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🌐</span>
+                    <span class="logo-text">GoEnglish</span>
+                </div>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
 
-<!-- ================= NAVBAR ================= -->
-<header id="navbar" class="sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-5 md:px-8 h-[68px] flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-2 shrink-0">
-      <span class="w-8 h-8 rounded-lg bg-gradient flex items-center justify-center font-display font-extrabold text-sm text-white">Go</span>
-      <span class="font-display font-extrabold text-lg tracking-tight">GoEnglish</span>
-    </a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link" data-page="dashboard">🏠 Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-page="learn">📚 Learn</a></li>
+                <li><a href="#" class="nav-link" data-page="grammar">📝 Grammar</a></li>
+                <li><a href="#" class="nav-link" data-page="vocabulary">🔤 Vocabulary</a></li>
+                <li><a href="#" class="nav-link" data-page="verbs">⚡ Verbs</a></li>
+                <li><a href="#" class="nav-link" data-page="pronunciation">🔊 Pronunciation</a></li>
+                <li><a href="#" class="nav-link" data-page="speaking">🗣 Speaking</a></li>
+                <li><a href="#" class="nav-link" data-page="listening">🎧 Listening</a></li>
+                <li><a href="#" class="nav-link" data-page="reading">📖 Reading</a></li>
+                <li><a href="#" class="nav-link" data-page="writing">✍️ Writing</a></li>
+                <li><a href="#" class="nav-link" data-page="realEnglish">💬 Real English</a></li>
+                <li><a href="#" class="nav-link" data-page="phrasal">🔗 Phrasal Verbs</a></li>
+                <li><a href="#" class="nav-link" data-page="review">🧠 Review</a></li>
+                <li><a href="#" class="nav-link" data-page="achievements">🏆 Achievements</a></li>
+                <li><a href="#" class="nav-link" data-page="profile">👤 Profile</a></li>
+                <li><a href="#" class="nav-link" data-page="settings">⚙️ Settings</a></li>
+            </ul>
 
-    <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
-      <a href="#top" class="nav-link">Home</a>
-      <a href="#journey" class="nav-link">Lessons</a>
-      <a href="#categories" class="nav-link">Vocabulary</a>
-      <a href="#categories" class="nav-link">Grammar</a>
-      <a href="#daily" class="nav-link">Pronunciation</a>
-      <a href="#practice" class="nav-link">Practice</a>
-    </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-details">
+                        <p class="user-name" id="sidebarUserName">User</p>
+                        <p class="user-level" id="sidebarUserLevel">Level 1</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-    <div class="flex items-center gap-2">
-      <button id="search-btn" aria-label="Search" class="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-[--text-muted] hover:text-[--text] transition-colors">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      </button>
-      <button id="theme-toggle" aria-label="Toggle theme" class="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-[--text-muted] hover:text-[--text] transition-colors">
-        <span id="theme-icon">☀️</span>
-      </button>
-      <a href="#" class="hidden sm:inline-block text-sm font-medium text-[--text-muted] hover:text-[--text] px-3 py-2 transition-colors">Log in</a>
-      <a href="#top" class="btn-primary hidden sm:inline-block text-sm font-semibold px-4 py-2.5 rounded-full">Start Learning</a>
-      <button id="menu-btn" aria-label="Open menu" aria-expanded="false" class="lg:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5">
-        <span class="bar bar-top block w-5 h-[2px]"></span>
-        <span class="bar bar-mid block w-5 h-[2px]"></span>
-        <span class="bar bar-bottom block w-5 h-[2px]"></span>
-      </button>
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="globalSearch" placeholder="Search...">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                </div>
+            </header>
+
+            <!-- Pages Container -->
+            <div class="pages-container">
+                <!-- Dashboard Page -->
+                <div id="dashboard" class="page active">
+                    <div class="dashboard-container">
+                        <!-- Welcome Section -->
+                        <div class="welcome-section">
+                            <h2>Welcome back, <span id="dashboardUserName">User</span>! 👋</h2>
+                            <p>Keep up your learning streak and reach your goals</p>
+                        </div>
+
+                        <!-- Stats Grid -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">📊</div>
+                                <div class="stat-content">
+                                    <p class="stat-label">Current Level</p>
+                                    <p class="stat-value" id="statLevel">A1 - Beginner</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">⭐</div>
+                                <div class="stat-content">
+                                    <p class="stat-label">Total XP</p>
+                                    <p class="stat-value" id="statXP">0</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🔥</div>
+                                <div class="stat-content">
+                                    <p class="stat-label">Daily Streak</p>
+                                    <p class="stat-value" id="statStreak">0 days</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📚</div>
+                                <div class="stat-content">
+                                    <p class="stat-label">Lessons Completed</p>
+                                    <p class="stat-value" id="statLessons">0</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🎯</div>
+                                <div class="stat-content">
+                                    <p class="stat-label">Words Learned</p>
+                                    <p class="stat-value" id="statWords">0</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">⏱️</div>
+                                <div class="stat-content">
+                                    <p class="stat-label">Minutes Studied</p>
+                                    <p class="stat-value" id="statMinutes">0</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <h3>Overall Progress</h3>
+                                <span class="progress-percent" id="progressPercent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+
+                        <!-- Continue Learning Section -->
+                        <button class="btn btn-primary btn-large" id="continueStudyBtn">
+                            ▶️ Continue Studying
+                        </button>
+
+                        <!-- Quick Access Sections -->
+                        <div class="dashboard-sections">
+                            <!-- Recent Lessons -->
+                            <div class="dashboard-card">
+                                <h3>📖 Recent Lessons</h3>
+                                <div class="recent-lessons" id="recentLessons">
+                                    <p class="empty-state">No lessons completed yet</p>
+                                </div>
+                            </div>
+
+                            <!-- Daily Goal -->
+                            <div class="dashboard-card">
+                                <h3>🎯 Daily Goal</h3>
+                                <div class="daily-goal">
+                                    <p class="goal-text">Complete 5 exercises today</p>
+                                    <div class="goal-progress">
+                                        <div class="goal-fill" id="goalFill"></div>
+                                    </div>
+                                    <p class="goal-count"><span id="goalCount">0</span>/5 completed</p>
+                                </div>
+                            </div>
+
+                            <!-- Recommended Lesson -->
+                            <div class="dashboard-card">
+                                <h3>💡 Recommended Lesson</h3>
+                                <div class="recommended-lesson">
+                                    <div class="lesson-card" id="recommendedCard">
+                                        <h4 id="recommendedTitle">Letters & Alphabet</h4>
+                                        <p id="recommendedDesc">Master the English alphabet and pronunciation</p>
+                                        <button class="btn btn-secondary" onclick="app.goToPage('learn')">Start Lesson →</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Achievements -->
+                            <div class="dashboard-card">
+                                <h3>🏆 Recent Achievements</h3>
+                                <div class="achievements-list" id="recentAchievements">
+                                    <p class="empty-state">No achievements yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learn Page -->
+                <div id="learn" class="page">
+                    <div class="learn-container">
+                        <div class="learn-header">
+                            <h2>Start Learning</h2>
+                            <p>Choose your learning level and topic</p>
+                        </div>
+
+                        <div class="levels-grid">
+                            <div class="level-card" onclick="app.selectLevel('A1')">
+                                <h3>A1</h3>
+                                <p>Beginner</p>
+                                <span class="progress-badge" id="levelA1Progress">0%</span>
+                            </div>
+                            <div class="level-card" onclick="app.selectLevel('A2')">
+                                <h3>A2</h3>
+                                <p>Elementary</p>
+                                <span class="progress-badge" id="levelA2Progress">0%</span>
+                            </div>
+                            <div class="level-card" onclick="app.selectLevel('B1')">
+                                <h3>B1</h3>
+                                <p>Intermediate</p>
+                                <span class="progress-badge" id="levelB1Progress">0%</span>
+                            </div>
+                            <div class="level-card" onclick="app.selectLevel('B2')">
+                                <h3>B2</h3>
+                                <p>Upper Intermediate</p>
+                                <span class="progress-badge" id="levelB2Progress">0%</span>
+                            </div>
+                            <div class="level-card" onclick="app.selectLevel('C1')">
+                                <h3>C1</h3>
+                                <p>Advanced</p>
+                                <span class="progress-badge" id="levelC1Progress">0%</span>
+                            </div>
+                            <div class="level-card" onclick="app.selectLevel('C2')">
+                                <h3>C2</h3>
+                                <p>Master</p>
+                                <span class="progress-badge" id="levelC2Progress">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="lessons-list" id="lessonsList">
+                            <p class="empty-state">Select a level to view lessons</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grammar Page -->
+                <div id="grammar" class="page">
+                    <div class="content-container">
+                        <h2>📝 Grammar</h2>
+                        <div class="filter-tabs">
+                            <button class="tab-btn active" onclick="app.filterByLevel('all', this)">All Levels</button>
+                            <button class="tab-btn" onclick="app.filterByLevel('A1', this)">A1</button>
+                            <button class="tab-btn" onclick="app.filterByLevel('A2', this)">A2</button>
+                            <button class="tab-btn" onclick="app.filterByLevel('B1', this)">B1</button>
+                            <button class="tab-btn" onclick="app.filterByLevel('B2', this)">B2</button>
+                            <button class="tab-btn" onclick="app.filterByLevel('C1', this)">C1</button>
+                        </div>
+                        <div class="grammar-list" id="grammarList"></div>
+                    </div>
+                </div>
+
+                <!-- Vocabulary Page -->
+                <div id="vocabulary" class="page">
+                    <div class="content-container">
+                        <h2>🔤 Vocabulary</h2>
+                        <div class="vocab-tabs">
+                            <button class="tab-btn active" onclick="app.filterByCategory('all', this)">All</button>
+                            <button class="tab-btn" onclick="app.filterByCategory('daily', this)">Daily Life</button>
+                            <button class="tab-btn" onclick="app.filterByCategory('family', this)">Family</button>
+                            <button class="tab-btn" onclick="app.filterByCategory('food', this)">Food</button>
+                            <button class="tab-btn" onclick="app.filterByCategory('travel', this)">Travel</button>
+                            <button class="tab-btn" onclick="app.filterByCategory('work', this)">Work</button>
+                            <button class="tab-btn" onclick="app.filterByCategory('nature', this)">Nature</button>
+                        </div>
+                        <div class="vocabulary-grid" id="vocabularyGrid"></div>
+                    </div>
+                </div>
+
+                <!-- Verbs Page -->
+                <div id="verbs" class="page">
+                    <div class="content-container">
+                        <h2>⚡ English Verbs</h2>
+                        <div class="verbs-filter">
+                            <button class="tab-btn active" onclick="app.filterVerbs('all', this)">All</button>
+                            <button class="tab-btn" onclick="app.filterVerbs('regular', this)">Regular</button>
+                            <button class="tab-btn" onclick="app.filterVerbs('irregular', this)">Irregular</button>
+                            <button class="tab-btn" onclick="app.filterVerbs('modal', this)">Modal</button>
+                            <button class="tab-btn" onclick="app.filterVerbs('phrasal', this)">Phrasal</button>
+                        </div>
+                        <div class="verbs-table" id="verbsTable"></div>
+                    </div>
+                </div>
+
+                <!-- Pronunciation Page -->
+                <div id="pronunciation" class="page">
+                    <div class="content-container">
+                        <h2>🔊 Pronunciation</h2>
+                        <div class="pronunciation-list" id="pronunciationList"></div>
+                    </div>
+                </div>
+
+                <!-- Speaking Page -->
+                <div id="speaking" class="page">
+                    <div class="content-container">
+                        <h2>🗣 Speaking Practice</h2>
+                        <div class="speaking-scenarios" id="speakingScenarios"></div>
+                    </div>
+                </div>
+
+                <!-- Listening Page -->
+                <div id="listening" class="page">
+                    <div class="content-container">
+                        <h2>🎧 Listening Practice</h2>
+                        <div class="listening-exercises" id="listeningExercises"></div>
+                    </div>
+                </div>
+
+                <!-- Reading Page -->
+                <div id="reading" class="page">
+                    <div class="content-container">
+                        <h2>📖 Reading</h2>
+                        <div class="reading-texts" id="readingTexts"></div>
+                    </div>
+                </div>
+
+                <!-- Writing Page -->
+                <div id="writing" class="page">
+                    <div class="content-container">
+                        <h2>✍️ Writing Practice</h2>
+                        <div class="writing-exercises" id="writingExercises"></div>
+                    </div>
+                </div>
+
+                <!-- Real English Page -->
+                <div id="realEnglish" class="page">
+                    <div class="content-container">
+                        <h2>💬 Real English Expressions</h2>
+                        <div class="real-english-list" id="realEnglishList"></div>
+                    </div>
+                </div>
+
+                <!-- Phrasal Verbs Page -->
+                <div id="phrasal" class="page">
+                    <div class="content-container">
+                        <h2>🔗 Phrasal Verbs</h2>
+                        <div class="phrasal-list" id="phrasalList"></div>
+                    </div>
+                </div>
+
+                <!-- Review Page -->
+                <div id="review" class="page">
+                    <div class="content-container">
+                        <h2>🧠 Review Mode</h2>
+                        <div class="review-container" id="reviewContainer">
+                            <p>Review your mistakes and weak areas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements Page -->
+                <div id="achievements" class="page">
+                    <div class="content-container">
+                        <h2>🏆 Achievements</h2>
+                        <div class="achievements-grid" id="achievementsGrid"></div>
+                    </div>
+                </div>
+
+                <!-- Profile Page -->
+                <div id="profile" class="page">
+                    <div class="profile-container">
+                        <div class="profile-header">
+                            <div class="profile-avatar">👤</div>
+                            <div class="profile-info">
+                                <h2 id="profileName">User</h2>
+                                <p id="profileLevel">Level 1</p>
+                            </div>
+                        </div>
+
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <p class="stat-label">Total XP</p>
+                                <p class="stat-number" id="profileXP">0</p>
+                            </div>
+                            <div class="stat">
+                                <p class="stat-label">Lessons</p>
+                                <p class="stat-number" id="profileLessons">0</p>
+                            </div>
+                            <div class="stat">
+                                <p class="stat-label">Words Learned</p>
+                                <p class="stat-number" id="profileWords">0</p>
+                            </div>
+                            <div class="stat">
+                                <p class="stat-label">Streak</p>
+                                <p class="stat-number" id="profileStreak">0</p>
+                            </div>
+                        </div>
+
+                        <div class="profile-achievements">
+                            <h3>Achievements Unlocked</h3>
+                            <div class="achievements-list-full" id="profileAchievements"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settings" class="page">
+                    <div class="settings-container">
+                        <h2>⚙️ Settings</h2>
+
+                        <div class="settings-section">
+                            <h3>🎨 Appearance</h3>
+                            <div class="setting-item">
+                                <label>Theme:</label>
+                                <div class="theme-options">
+                                    <button class="theme-option active" onclick="app.setTheme('dark')">Dark</button>
+                                    <button class="theme-option" onclick="app.setTheme('light')">Light</button>
+                                    <button class="theme-option" onclick="app.setTheme('purple')">Purple</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>🔊 Audio</h3>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="soundEnabled" checked>
+                                    Enable sound effects
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="autoPlayAudio" checked>
+                                    Auto-play audio
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>Audio Speed:</label>
+                                <select id="audioSpeed">
+                                    <option value="0.75">Slow (0.75x)</option>
+                                    <option value="1" selected>Normal</option>
+                                    <option value="1.25">Fast (1.25x)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>👤 User Profile</h3>
+                            <div class="setting-item">
+                                <label>Name:</label>
+                                <input type="text" id="userName" placeholder="Enter your name">
+                            </div>
+                            <button class="btn btn-secondary" onclick="app.saveName()">Save Name</button>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>💾 Data</h3>
+                            <button class="btn btn-secondary" onclick="app.exportData()">Export Progress</button>
+                            <button class="btn btn-danger" onclick="app.resetProgress()">Reset All Progress</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-  </div>
 
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-[--border]" style="background: var(--bg);">
-    <div class="px-5 py-3 flex flex-col text-sm font-medium">
-      <a href="#top" class="mobile-link py-3">Home</a>
-      <a href="#journey" class="mobile-link py-3">Lessons</a>
-      <a href="#categories" class="mobile-link py-3">Vocabulary</a>
-      <a href="#categories" class="mobile-link py-3">Grammar</a>
-      <a href="#daily" class="mobile-link py-3">Pronunciation</a>
-      <a href="#practice" class="mobile-link py-3">Practice</a>
-      <a href="#" class="mobile-link py-3">Log in</a>
-      <a href="#top" class="btn-primary text-center font-semibold px-4 py-2.5 rounded-full mt-3">Start Learning</a>
-    </div>
-  </div>
-</header>
-
-<!-- ================= HERO ================= -->
-<section id="top" class="relative overflow-hidden">
-  <div class="hero-glow" style="top: -220px; left: -180px;"></div>
-  <div class="max-w-7xl mx-auto px-5 md:px-8 pt-14 pb-20 md:pt-20 md:pb-28 grid lg:grid-cols-[1.05fr_1fr] gap-14 items-center relative">
-
-    <div>
-      <h1 class="hero-enter d1 font-display font-extrabold text-[2.6rem] leading-[1.08] sm:text-5xl md:text-[3.4rem] md:leading-[1.08] tracking-tight">
-        Learn English.<br>Speak with confidence.
-      </h1>
-      <p class="hero-enter d2 text-[--text-muted] text-lg mt-5 max-w-md leading-relaxed">
-        Improve your English with practical lessons, everyday vocabulary, pronunciation and real conversations.
-      </p>
-      <div class="hero-enter d3 flex flex-wrap gap-3 mt-8">
-        <a href="#practice" class="btn-primary px-6 py-3.5 rounded-full font-semibold text-sm">Start Learning</a>
-        <a href="#categories" class="btn-secondary px-6 py-3.5 rounded-full font-semibold text-sm">Explore Lessons</a>
-      </div>
-
-      <div class="hero-enter d4 flex items-center gap-6 mt-10 text-sm text-[--text-muted]">
-        <div class="flex items-center gap-2">
-          <span class="font-display font-extrabold text-[--text] text-lg">40k+</span> students learning
+    <!-- Modal for showing content details -->
+    <div class="modal" id="contentModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="app.closeModal()">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
         </div>
-        <div class="w-px h-8 bg-[--border]"></div>
-        <div class="flex items-center gap-2">
-          <span class="font-display font-extrabold text-[--text] text-lg">4.9</span> average rating
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="modal" id="quizModal">
+        <div class="modal-content modal-quiz">
+            <button class="modal-close" onclick="app.closeQuiz()">&times;</button>
+            <div class="quiz-container" id="quizContainer"></div>
         </div>
-      </div>
     </div>
 
-    <!-- illustration -->
-    <div class="hero-enter d3 relative mx-auto w-full max-w-[420px]">
-      <div class="floating-chip c1">Hello! 👋</div>
-      <div class="floating-chip c2">How are you?</div>
-      <div class="floating-chip c3">Let's practice!</div>
-      <div class="floating-chip c4">I wanna learn English.</div>
-
-      <div class="hero-illustration p-5">
-        <div class="mock-topbar flex items-center gap-1.5 mb-4">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="flex items-center justify-between mb-4">
-          <p class="font-display font-bold text-sm">Today's lesson</p>
-          <span class="text-xs font-semibold text-[--purple-soft] bg-[--surface-2] px-2.5 py-1 rounded-full">Conversation</span>
-        </div>
-        <div class="flex flex-col gap-2 mb-5">
-          <div class="mock-bubble them">Can I get a coffee, please?</div>
-          <div class="mock-bubble me">Sure! What size would you like?</div>
-        </div>
-        <div class="surface-soft rounded-xl p-3.5">
-          <div class="flex items-center justify-between text-xs mb-2">
-            <span class="text-[--text-muted]">Lesson progress</span>
-            <span class="font-semibold">72%</span>
-          </div>
-          <div class="mock-progress-track">
-            <div class="mock-progress-fill" style="width: 72%;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================= YOUR ENGLISH JOURNEY ================= -->
-<section id="journey" class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
-  <div class="flex flex-wrap items-end justify-between gap-6 mb-10">
-    <div>
-      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Your English Journey</h2>
-      <p class="text-[--text-muted] mt-2 max-w-md">Track how far you've come, one lesson at a time.</p>
-    </div>
-    <div class="flex gap-1 surface-soft rounded-full p-1" id="level-switcher">
-      <button data-level="beginner" class="level-btn active px-4 py-2 rounded-full text-sm font-semibold">Beginner</button>
-      <button data-level="intermediate" class="level-btn px-4 py-2 rounded-full text-sm font-semibold">Intermediate</button>
-      <button data-level="advanced" class="level-btn px-4 py-2 rounded-full text-sm font-semibold">Advanced</button>
-    </div>
-  </div>
-
-  <div class="grid md:grid-cols-[1fr_1.2fr] gap-6">
-    <div class="grid grid-cols-2 gap-4">
-      <div class="stat-pill p-5">
-        <p class="font-display font-extrabold text-3xl" id="stat-lessons">86</p>
-        <p class="text-sm text-[--text-muted] mt-1">Lessons completed</p>
-      </div>
-      <div class="stat-pill p-5">
-        <p class="font-display font-extrabold text-3xl" id="stat-words">512</p>
-        <p class="text-sm text-[--text-muted] mt-1">Words learned</p>
-      </div>
-      <div class="stat-pill p-5">
-        <p class="font-display font-extrabold text-3xl" id="stat-streak">14</p>
-        <p class="text-sm text-[--text-muted] mt-1">Day streak</p>
-      </div>
-      <div class="stat-pill p-5">
-        <p class="font-display font-extrabold text-3xl" id="stat-percent">63%</p>
-        <p class="text-sm text-[--text-muted] mt-1">Level progress</p>
-      </div>
-    </div>
-
-    <div class="surface rounded-2xl p-6 flex flex-col justify-center gap-5">
-      <div class="progress-row">
-        <div class="flex items-center justify-between text-sm mb-2">
-          <span class="font-medium">Vocabulary</span>
-          <span class="text-[--text-muted]" data-value="80">80%</span>
-        </div>
-        <div class="bar-track"><div class="bar-fill" data-width="80"></div></div>
-      </div>
-      <div class="progress-row">
-        <div class="flex items-center justify-between text-sm mb-2">
-          <span class="font-medium">Grammar</span>
-          <span class="text-[--text-muted]" data-value="55">55%</span>
-        </div>
-        <div class="bar-track"><div class="bar-fill" data-width="55"></div></div>
-      </div>
-      <div class="progress-row">
-        <div class="flex items-center justify-between text-sm mb-2">
-          <span class="font-medium">Pronunciation</span>
-          <span class="text-[--text-muted]" data-value="47">47%</span>
-        </div>
-        <div class="bar-track"><div class="bar-fill" data-width="47"></div></div>
-      </div>
-      <div class="progress-row">
-        <div class="flex items-center justify-between text-sm mb-2">
-          <span class="font-medium">Conversation</span>
-          <span class="text-[--text-muted]" data-value="65">65%</span>
-        </div>
-        <div class="bar-track"><div class="bar-fill" data-width="65"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CATEGORIES ================= -->
-<section id="categories" class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
-  <div class="max-w-lg mb-10">
-    <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Everything you need to learn</h2>
-    <p class="text-[--text-muted] mt-2">Five focused paths, so you always know what to study next.</p>
-  </div>
-
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-    <div class="category-card p-6">
-      <div class="category-icon mb-5">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      </div>
-      <h3 class="font-display font-bold text-lg">Vocabulary</h3>
-      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Learn useful words and expressions for everyday situations.</p>
-      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
-    </div>
-
-    <div class="category-card p-6">
-      <div class="category-icon mb-5">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
-      </div>
-      <h3 class="font-display font-bold text-lg">Grammar</h3>
-      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Understand English grammar through simple, practical rules.</p>
-      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
-    </div>
-
-    <div class="category-card p-6">
-      <div class="category-icon mb-5">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3M8 22h8"/><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/></svg>
-      </div>
-      <h3 class="font-display font-bold text-lg">Pronunciation</h3>
-      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Improve your pronunciation and train your listening ear.</p>
-      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
-    </div>
-
-    <div class="category-card p-6">
-      <div class="category-icon mb-5">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <h3 class="font-display font-bold text-lg">Conversation</h3>
-      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Practice real-world conversations with guided dialogues.</p>
-      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
-    </div>
-
-    <div class="category-card p-6">
-      <div class="category-icon mb-5">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-      </div>
-      <h3 class="font-display font-bold text-lg">Everyday English</h3>
-      <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Learn the expressions native speakers actually use.</p>
-      <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Learn more</a>
-    </div>
-
-    <a href="#practice" class="category-card p-6 flex flex-col justify-between" style="background: var(--gradient-soft);">
-      <div>
-        <h3 class="font-display font-bold text-lg">Practice everything</h3>
-        <p class="text-sm text-[--text-muted] mt-2 leading-relaxed">Mix it all together with quizzes, exercises and daily goals.</p>
-      </div>
-      <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-[--purple-soft] mt-4">Go to practice</span>
-    </a>
-  </div>
-</section>
-
-<!-- ================= ENGLISH IN REAL LIFE ================= -->
-<section class="border-y border-[--border]" style="background: var(--bg-soft);">
-  <div class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center reveal">
-    <div>
-      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">English in real life</h2>
-      <p class="text-[--text-muted] mt-3 max-w-md leading-relaxed">
-        Textbook English only gets you so far. These are the exact lines people use in real situations — with the Portuguese meaning right below, so nothing gets lost.
-      </p>
-      <a href="#" class="btn-primary inline-block px-6 py-3.5 rounded-full font-semibold text-sm mt-7">Practice Conversation</a>
-    </div>
-
-    <div class="conversation-panel p-6 md:p-7">
-      <p class="text-xs font-semibold text-[--purple-soft] mb-5">At a Restaurant</p>
-      <div class="flex flex-col gap-4">
-        <div>
-          <div class="mock-bubble them">"Can I get a pizza, please?"</div>
-          <p class="pt-translation mt-1.5 ml-1">Posso pedir uma pizza, por favor?</p>
-        </div>
-        <div>
-          <div class="mock-bubble me">"Sure! What flavor would you like?"</div>
-          <p class="pt-translation mt-1.5 mr-1 text-right">Claro! Qual sabor você gostaria?</p>
-        </div>
-        <div>
-          <div class="mock-bubble them">"I'll have a pepperoni, please."</div>
-          <p class="pt-translation mt-1.5 ml-1">Vou querer uma de pepperoni, por favor.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= ENGLISH OF THE DAY ================= -->
-<section id="daily" class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
-  <div class="grid lg:grid-cols-[1fr_1.3fr] gap-10 items-center">
-    <div>
-      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">English of the day</h2>
-      <p class="text-[--text-muted] mt-3 max-w-sm leading-relaxed">One small expression, every day. Enough to remember, not enough to overwhelm.</p>
-    </div>
-
-    <div class="daily-card p-7 md:p-8 flex items-center gap-6">
-      <button id="daily-audio-btn" class="audio-btn" aria-label="Play pronunciation">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <div class="min-w-0">
-        <div class="flex items-baseline gap-3 flex-wrap">
-          <p class="font-display font-extrabold text-2xl">Wanna</p>
-          <span class="text-sm font-mono text-[--text-faint]">/ˈwɒnə/</span>
-        </div>
-        <p class="text-sm text-[--text-muted] mt-0.5">Short for "want to"</p>
-        <p class="mt-4 text-[--text]">"Do you <span class="text-gradient font-semibold">wanna</span> go?"</p>
-        <p class="text-sm text-[--text-faint] mt-1">Você quer ir?</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PRACTICE / GAMIFICATION ================= -->
-<section id="practice" class="border-y border-[--border]" style="background: var(--bg-soft);">
-  <div class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
-    <div class="flex flex-wrap items-end justify-between gap-6 mb-10">
-      <div>
-        <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Practice keeps it in your head</h2>
-        <p class="text-[--text-muted] mt-2 max-w-md">Short daily exercises, quizzes and a streak worth keeping.</p>
-      </div>
-      <div class="flex items-center gap-4">
-        <div class="flex items-center gap-2 stat-pill px-4 py-2.5">
-          <span class="text-[--purple-soft] font-display font-extrabold">2,340</span>
-          <span class="text-sm text-[--text-muted]">XP</span>
-        </div>
-        <div class="flex items-center gap-2 stat-pill px-4 py-2.5">
-          <span>🔥</span>
-          <span class="font-display font-extrabold">14</span>
-          <span class="text-sm text-[--text-muted]">days</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid lg:grid-cols-[0.9fr_1.4fr] gap-6">
-      <!-- daily goal -->
-      <div class="surface rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-        <div class="goal-ring" id="goal-ring">
-          <div class="goal-ring-inner"><span id="goal-ring-text">70%</span></div>
-        </div>
-        <p class="font-semibold mt-4">Daily goal</p>
-        <p class="text-sm text-[--text-muted] mt-1">14 / 20 XP today</p>
-      </div>
-
-      <!-- quiz -->
-      <div class="surface rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-5">
-          <p class="font-semibold">Quick quiz</p>
-          <span class="text-xs font-semibold text-[--purple-soft] bg-[--surface-2] px-2.5 py-1 rounded-full">Vocabulary</span>
-        </div>
-        <p class="mb-4">What does <span class="font-semibold text-gradient">"gonna"</span> mean?</p>
-        <div class="grid sm:grid-cols-3 gap-3" id="quiz-options">
-          <button class="quiz-option rounded-xl px-4 py-3 text-sm font-medium text-left" data-correct="false">Going to work</button>
-          <button class="quiz-option rounded-xl px-4 py-3 text-sm font-medium text-left" data-correct="true">Going to</button>
-          <button class="quiz-option rounded-xl px-4 py-3 text-sm font-medium text-left" data-correct="false">Want a</button>
-        </div>
-        <p id="quiz-feedback" class="text-sm mt-4 h-5"></p>
-      </div>
-    </div>
-
-    <!-- achievements -->
-    <div class="mt-6 surface rounded-2xl p-6">
-      <p class="font-semibold mb-4">Achievements</p>
-      <div class="flex flex-wrap gap-3">
-        <div class="achievement unlocked" title="7-day streak">🔥</div>
-        <div class="achievement unlocked" title="First 100 words">📚</div>
-        <div class="achievement unlocked" title="Perfect quiz">🎯</div>
-        <div class="achievement locked" title="30-day streak">🏆</div>
-        <div class="achievement locked" title="Conversation master">💬</div>
-        <div class="achievement locked" title="Grammar pro">🧠</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= TESTIMONIALS ================= -->
-<section class="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 reveal">
-  <div class="max-w-lg mb-10">
-    <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">Students who kept going</h2>
-    <p class="text-[--text-muted] mt-2">Small daily lessons, real progress.</p>
-  </div>
-
-  <div class="grid md:grid-cols-3 gap-5">
-    <div class="testimonial-card p-6">
-      <p class="text-[--text] leading-relaxed">"I finally understand how to use 'gonna' and 'wanna' in real conversations, not just in theory."</p>
-      <div class="flex items-center gap-3 mt-5">
-        <div class="avatar-dot">MC</div>
-        <div>
-          <p class="font-semibold text-sm">Marina Costa</p>
-          <p class="text-xs text-[--text-muted]">Beginner → Intermediate</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="testimonial-card p-6">
-      <p class="text-[--text] leading-relaxed">"The pronunciation lessons made the biggest difference. I can finally follow podcasts without subtitles."</p>
-      <div class="flex items-center gap-3 mt-5">
-        <div class="avatar-dot">RA</div>
-        <div>
-          <p class="font-semibold text-sm">Rafael Almeida</p>
-          <p class="text-xs text-[--text-muted]">Intermediate</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="testimonial-card p-6">
-      <p class="text-[--text] leading-relaxed">"Ten minutes a day, no pressure. My streak is at 40 days and I actually look forward to it."</p>
-      <div class="flex items-center gap-3 mt-5">
-        <div class="avatar-dot">JS</div>
-        <div>
-          <p class="font-semibold text-sm">Julia Santos</p>
-          <p class="text-xs text-[--text-muted]">Advanced</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="border-t border-[--border]">
-  <div class="max-w-7xl mx-auto px-5 md:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
-    <div>
-      <a href="#top" class="flex items-center gap-2">
-        <span class="w-8 h-8 rounded-lg bg-gradient flex items-center justify-center font-display font-extrabold text-sm text-white">Go</span>
-        <span class="font-display font-extrabold text-lg">GoEnglish</span>
-      </a>
-      <p class="text-sm text-[--text-muted] mt-4 max-w-xs leading-relaxed">Learn English. Speak with confidence.</p>
-      <div class="flex gap-2 mt-5">
-        <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
-        <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" class="social-btn" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4c.5 2 2 4 5 4"/></svg></a>
-      </div>
-    </div>
-
-    <div>
-      <p class="font-semibold text-sm mb-4">Platform</p>
-      <div class="flex flex-col gap-3 text-sm">
-        <a href="#" class="footer-link">About</a>
-        <a href="#journey" class="footer-link">Lessons</a>
-        <a href="#categories" class="footer-link">Vocabulary</a>
-        <a href="#categories" class="footer-link">Grammar</a>
-      </div>
-    </div>
-
-    <div>
-      <p class="font-semibold text-sm mb-4">Company</p>
-      <div class="flex flex-col gap-3 text-sm">
-        <a href="#" class="footer-link">Contact</a>
-        <a href="#" class="footer-link">Careers</a>
-        <a href="#" class="footer-link">Blog</a>
-      </div>
-    </div>
-
-    <div>
-      <p class="font-semibold text-sm mb-4">Legal</p>
-      <div class="flex flex-col gap-3 text-sm">
-        <a href="#" class="footer-link">Privacy</a>
-        <a href="#" class="footer-link">Terms</a>
-      </div>
-    </div>
-  </div>
-  <div class="border-t border-[--border]">
-    <p class="max-w-7xl mx-auto px-5 md:px-8 py-5 text-xs text-[--text-faint]">© 2026 GoEnglish. All rights reserved.</p>
-  </div>
-</footer>
-
-<div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 items-end"></div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
