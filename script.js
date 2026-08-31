@@ -525,10 +525,16 @@ const micPermissionBtn = document.getElementById("mic-permission-btn");
 // Menu mobile
 // ---------------------------------------------------------------------------
 mobileMenuBtn.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
+  const isOpen = mobileMenu.classList.toggle("hidden") === false;
+  mobileMenuBtn.classList.toggle("is-open", isOpen);
+  mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
 });
 mobileMenu.querySelectorAll(".mobile-link").forEach((link) => {
-  link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+  link.addEventListener("click", () => {
+    mobileMenu.classList.add("hidden");
+    mobileMenuBtn.classList.remove("is-open");
+    mobileMenuBtn.setAttribute("aria-expanded", "false");
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -851,7 +857,7 @@ function renderDiff(tokens) {
   });
 }
 
-function setRecordingUI(active) {
+function setRecordingUI(active, stream) {
   isListening = active;
   startRecordBtn.classList.toggle("recording", active);
   startRecordBtn.textContent = active ? "🎙️ Solte para verificar" : "🎤 Segure para falar";
@@ -860,7 +866,7 @@ function setRecordingUI(active) {
     feedbackContainer.classList.add("hidden");
     feedbackPlaceholderText.textContent = "Fale agora…";
     micVisualizer.classList.remove("hidden");
-    startMicVisualizer();
+    startMicVisualizer(stream);
   } else {
     micVisualizer.classList.add("hidden");
     feedbackPlaceholderText.textContent = "Sua comparação vai aparecer aqui.";
@@ -869,15 +875,15 @@ function setRecordingUI(active) {
 }
 
 // ---------------------------------------------------------------------------
-// Visualizador de microfone ao vivo (puramente decorativo, usa a mesma
-// permissão de microfone já concedida ao SpeechRecognition)
+// Visualizador de microfone ao vivo (reaproveita o mesmo MediaStream já
+// aberto para o reconhecimento de voz, em vez de pedir getUserMedia de novo)
 // ---------------------------------------------------------------------------
 let micStream = null, micAudioCtx = null, micAnalyser = null, micRafId = null;
 
-async function startMicVisualizer() {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+function startMicVisualizer(stream) {
+  if (!stream) return;
   try {
-    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    micStream = stream;
     micAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const source = micAudioCtx.createMediaStreamSource(micStream);
     micAnalyser = micAudioCtx.createAnalyser();
@@ -885,7 +891,7 @@ async function startMicVisualizer() {
     source.connect(micAnalyser);
     drawMicLevels();
   } catch (e) {
-    // Permissão negada ou indisponível — segue sem visualizador, o reconhecimento continua funcionando.
+    // AudioContext indisponível — segue sem visualizador, a gravação continua funcionando.
   }
 }
 
@@ -964,16 +970,20 @@ async function checkMicPermissionStatus() {
 }
 
 // Pede a permissão de fato (dispara o prompt nativo do navegador quando necessário).
-// Retorna true se o acesso foi concedido.
-async function requestMicPermission() {
+// Por padrão retorna true/false e fecha o stream de teste. Quando keepStream é
+// true, devolve o MediaStream aberto (para reaproveitar no reconhecimento de
+// voz e no visualizador, sem pedir a permissão duas vezes) ou null em caso
+// de falha.
+async function requestMicPermission(keepStream = false) {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     alert("Seu navegador não permite acesso ao microfone. Tente usar o Google Chrome ou Edge atualizados.");
-    return false;
+    return keepStream ? null : false;
   }
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    stream.getTracks().forEach((t) => t.stop());
     setMicBannerState("granted");
+    if (keepStream) return stream;
+    stream.getTracks().forEach((t) => t.stop());
     return true;
   } catch (e) {
     if (e.name === "NotAllowedError" || e.name === "SecurityError" || e.name === "PermissionDeniedError") {
@@ -983,7 +993,7 @@ async function requestMicPermission() {
     } else {
       showToast("⚠️ Não foi possível acessar o microfone.");
     }
-    return false;
+    return keepStream ? null : false;
   }
 }
 
@@ -1008,6 +1018,12 @@ let finalTranscript = "";
 let interimTranscript = "";
 let recognitionActive = false;
 let lastRecognitionError = null;
+// Enquanto aguardamos o prompt de permissão do navegador, o botão pode já
+// ter sido solto — sem esse controle, o reconhecimento começava mesmo
+// assim e ficava "preso" ouvindo, porque nada mais mandava pará-lo. É por
+// isso que o microfone às vezes parecia não funcionar.
+let awaitingPermission = false;
+let stopRequested = false;
 
 function buildRecognition() {
   const rec = new SpeechRecognitionCtor();
@@ -1019,7 +1035,7 @@ function buildRecognition() {
 }
 
 async function beginRecording() {
-  if (isListening || recognitionActive) return;
+  if (isListening || recognitionActive || awaitingPermission) return;
 
   if (!SpeechRecognitionCtor) {
     alert("Seu navegador não suporta reconhecimento de voz. Tente usar o Google Chrome ou Edge.");
@@ -1035,19 +1051,29 @@ async function beginRecording() {
     return;
   }
 
-  // Garante a permissão de microfone ANTES de iniciar o reconhecimento.
-  const granted = await requestMicPermission();
-  if (!granted) return;
+  // Garante a permissão de microfone ANTES de iniciar o reconhecimento, e
+  // guarda o stream para reaproveitar no visualizador (evita pedir a
+  // permissão duas vezes).
+  stopRequested = false;
+  awaitingPermission = true;
+  const stream = await requestMicPermission(true);
+  awaitingPermission = false;
+  if (!stream) { stopRequested = false; return; }
 
-  // Pode ter soltado o botão enquanto esperávamos a permissão.
-  if (isListening || recognitionActive) return;
+  // O usuário pode ter soltado o botão enquanto esperávamos a permissão —
+  // nesse caso não iniciamos o reconhecimento e liberamos o microfone.
+  if (stopRequested || isListening || recognitionActive) {
+    stopRequested = false;
+    stream.getTracks().forEach((t) => t.stop());
+    return;
+  }
 
   finalTranscript = "";
   interimTranscript = "";
   lastRecognitionError = null;
   recognition = buildRecognition();
   recognitionActive = true;
-  setRecordingUI(true);
+  setRecordingUI(true, stream);
 
   recognition.onresult = (event) => {
     let interim = "";
@@ -1087,8 +1113,12 @@ async function beginRecording() {
 }
 
 function endRecording() {
-  if (recognition && recognitionActive) {
+  if (recognitionActive) {
     recognition.stop();
+  } else if (awaitingPermission) {
+    // Ainda esperando a permissão do navegador: sinaliza para não iniciar
+    // o reconhecimento assim que ela chegar.
+    stopRequested = true;
   }
 }
 
@@ -1191,7 +1221,7 @@ function recordAttempt(phraseEn, accuracy) {
 
 function renderHistory() {
   if (!progress.history.length) {
-    attemptHistoryEl.innerHTML = '<li class="text-[--paper]/30">— nenhuma tentativa ainda —</li>';
+    attemptHistoryEl.innerHTML = '<li class="text-[--panel-fg]/30">— nenhuma tentativa ainda —</li>';
     return;
   }
   attemptHistoryEl.innerHTML = progress.history.map((h) => {
