@@ -290,6 +290,38 @@ const wordsData = [
   { en: "To speak", pt: "Falar", phonetic: "/tuː spiːk/", category: "verbos", emoji: "🗣️" },
   { en: "To listen", pt: "Ouvir", phonetic: "/tuː ˈlɪsən/", category: "verbos", emoji: "👂" },
   { en: "To watch", pt: "Assistir", phonetic: "/tuː wɒtʃ/", category: "verbos", emoji: "📺" },
+  { en: "To go", pt: "Ir", phonetic: "/tuː ɡoʊ/", category: "verbos", emoji: "🚶‍♂️" },
+  { en: "To come", pt: "Vir", phonetic: "/tuː kʌm/", category: "verbos", emoji: "👋" },
+  { en: "To have", pt: "Ter", phonetic: "/tuː hæv/", category: "verbos", emoji: "🤲" },
+  { en: "To want", pt: "Querer", phonetic: "/tuː wɒnt/", category: "verbos", emoji: "🙋" },
+  { en: "To need", pt: "Precisar", phonetic: "/tuː niːd/", category: "verbos", emoji: "❗" },
+  { en: "To like", pt: "Gostar", phonetic: "/tuː laɪk/", category: "verbos", emoji: "👍" },
+  { en: "To love", pt: "Amar", phonetic: "/tuː lʌv/", category: "verbos", emoji: "❤️" },
+  { en: "To know", pt: "Saber / Conhecer", phonetic: "/tuː noʊ/", category: "verbos", emoji: "🧠" },
+  { en: "To think", pt: "Pensar", phonetic: "/tuː θɪŋk/", category: "verbos", emoji: "💭" },
+  { en: "To see", pt: "Ver", phonetic: "/tuː siː/", category: "verbos", emoji: "👀" },
+  { en: "To buy", pt: "Comprar", phonetic: "/tuː baɪ/", category: "verbos", emoji: "🛍️" },
+  { en: "To sell", pt: "Vender", phonetic: "/tuː sɛl/", category: "verbos", emoji: "🏷️" },
+  { en: "To give", pt: "Dar", phonetic: "/tuː ɡɪv/", category: "verbos", emoji: "🎁" },
+  { en: "To take", pt: "Pegar / Levar", phonetic: "/tuː teɪk/", category: "verbos", emoji: "✋" },
+  { en: "To make", pt: "Fazer (produzir)", phonetic: "/tuː meɪk/", category: "verbos", emoji: "🛠️" },
+  { en: "To do", pt: "Fazer", phonetic: "/tuː duː/", category: "verbos", emoji: "✅" },
+  { en: "To play", pt: "Jogar / Brincar", phonetic: "/tuː pleɪ/", category: "verbos", emoji: "🎮" },
+  { en: "To help", pt: "Ajudar", phonetic: "/tuː hɛlp/", category: "verbos", emoji: "🤝" },
+  { en: "To find", pt: "Encontrar", phonetic: "/tuː faɪnd/", category: "verbos", emoji: "🔍" },
+  { en: "To open", pt: "Abrir", phonetic: "/tuː ˈoʊpən/", category: "verbos", emoji: "🔓" },
+  { en: "To close", pt: "Fechar", phonetic: "/tuː kloʊz/", category: "verbos", emoji: "🔒" },
+  { en: "To learn", pt: "Aprender", phonetic: "/tuː lɜːrn/", category: "verbos", emoji: "🎓" },
+  { en: "To teach", pt: "Ensinar", phonetic: "/tuː tiːtʃ/", category: "verbos", emoji: "👩‍🏫" },
+  { en: "To remember", pt: "Lembrar", phonetic: "/tuː rɪˈmɛmbər/", category: "verbos", emoji: "🧠" },
+  { en: "To forget", pt: "Esquecer", phonetic: "/tuː fərˈɡɛt/", category: "verbos", emoji: "🌫️" },
+  { en: "To try", pt: "Tentar", phonetic: "/tuː traɪ/", category: "verbos", emoji: "💪" },
+  { en: "To use", pt: "Usar", phonetic: "/tuː juːz/", category: "verbos", emoji: "🧰" },
+  { en: "To cook", pt: "Cozinhar", phonetic: "/tuː kʊk/", category: "verbos", emoji: "🍳" },
+  { en: "To drive", pt: "Dirigir", phonetic: "/tuː draɪv/", category: "verbos", emoji: "🚗" },
+  { en: "To travel", pt: "Viajar", phonetic: "/tuː ˈtrævəl/", category: "verbos", emoji: "✈️" },
+  { en: "To pay", pt: "Pagar", phonetic: "/tuː peɪ/", category: "verbos", emoji: "💳" },
+  { en: "To wait", pt: "Esperar", phonetic: "/tuː weɪt/", category: "verbos", emoji: "⏳" },
 
   // ---------- Objetos do dia a dia ----------
   { en: "Table", pt: "Mesa", phonetic: "/ˈteɪbəl/", category: "objetos", emoji: "🪑" },
@@ -304,6 +336,112 @@ const wordsData = [
   { en: "Clock", pt: "Relógio", phonetic: "/klɒk/", category: "objetos", emoji: "🕐" },
   { en: "Mirror", pt: "Espelho", phonetic: "/ˈmɪrər/", category: "objetos", emoji: "🪞" },
   { en: "Umbrella", pt: "Guarda-chuva", phonetic: "/ʌmˈbrɛlə/", category: "objetos", emoji: "☂️" },
+
+  // ---------- Adjetivos comuns ----------
+  { en: "Big", pt: "Grande", phonetic: "/bɪɡ/", category: "adjetivos", emoji: "🐘" },
+  { en: "Small", pt: "Pequeno", phonetic: "/smɔːl/", category: "adjetivos", emoji: "🐜" },
+  { en: "Hot", pt: "Quente", phonetic: "/hɒt/", category: "adjetivos", emoji: "🔥" },
+  { en: "Cold", pt: "Frio", phonetic: "/koʊld/", category: "adjetivos", emoji: "❄️" },
+  { en: "Happy", pt: "Feliz", phonetic: "/ˈhæpi/", category: "adjetivos", emoji: "😊" },
+  { en: "Sad", pt: "Triste", phonetic: "/sæd/", category: "adjetivos", emoji: "😢" },
+  { en: "Easy", pt: "Fácil", phonetic: "/ˈiːzi/", category: "adjetivos", emoji: "✅" },
+  { en: "Difficult", pt: "Difícil", phonetic: "/ˈdɪfɪkəlt/", category: "adjetivos", emoji: "🧩" },
+  { en: "Fast", pt: "Rápido", phonetic: "/fæst/", category: "adjetivos", emoji: "⚡" },
+  { en: "Slow", pt: "Lento", phonetic: "/sloʊ/", category: "adjetivos", emoji: "🐢" },
+  { en: "New", pt: "Novo", phonetic: "/njuː/", category: "adjetivos", emoji: "✨" },
+  { en: "Old", pt: "Velho / Antigo", phonetic: "/oʊld/", category: "adjetivos", emoji: "🕰️" },
+  { en: "Good", pt: "Bom", phonetic: "/ɡʊd/", category: "adjetivos", emoji: "👍" },
+  { en: "Bad", pt: "Ruim", phonetic: "/bæd/", category: "adjetivos", emoji: "👎" },
+  { en: "Beautiful", pt: "Bonito", phonetic: "/ˈbjuːtɪfəl/", category: "adjetivos", emoji: "🌸" },
+  { en: "Cheap", pt: "Barato", phonetic: "/tʃiːp/", category: "adjetivos", emoji: "💸" },
+  { en: "Expensive", pt: "Caro", phonetic: "/ɪkˈspɛnsɪv/", category: "adjetivos", emoji: "💰" },
+  { en: "Strong", pt: "Forte", phonetic: "/strɒŋ/", category: "adjetivos", emoji: "💪" },
+  { en: "Clean", pt: "Limpo", phonetic: "/kliːn/", category: "adjetivos", emoji: "🧼" },
+  { en: "Tall", pt: "Alto", phonetic: "/tɔːl/", category: "adjetivos", emoji: "📏" },
+
+  // ---------- Partes do corpo ----------
+  { en: "Head", pt: "Cabeça", phonetic: "/hɛd/", category: "corpo", emoji: "🧠" },
+  { en: "Eye", pt: "Olho", phonetic: "/aɪ/", category: "corpo", emoji: "👁️" },
+  { en: "Ear", pt: "Orelha", phonetic: "/ɪr/", category: "corpo", emoji: "👂" },
+  { en: "Nose", pt: "Nariz", phonetic: "/noʊz/", category: "corpo", emoji: "👃" },
+  { en: "Mouth", pt: "Boca", phonetic: "/maʊθ/", category: "corpo", emoji: "👄" },
+  { en: "Hand", pt: "Mão", phonetic: "/hænd/", category: "corpo", emoji: "✋" },
+  { en: "Arm", pt: "Braço", phonetic: "/ɑːrm/", category: "corpo", emoji: "💪" },
+  { en: "Leg", pt: "Perna", phonetic: "/lɛɡ/", category: "corpo", emoji: "🦵" },
+  { en: "Foot", pt: "Pé", phonetic: "/fʊt/", category: "corpo", emoji: "🦶" },
+  { en: "Hair", pt: "Cabelo", phonetic: "/hɛr/", category: "corpo", emoji: "💇" },
+  { en: "Back", pt: "Costas", phonetic: "/bæk/", category: "corpo", emoji: "🔙" },
+  { en: "Stomach", pt: "Barriga / Estômago", phonetic: "/ˈstʌmək/", category: "corpo", emoji: "🩺" },
+  { en: "Tooth", pt: "Dente", phonetic: "/tuːθ/", category: "corpo", emoji: "🦷" },
+  { en: "Finger", pt: "Dedo", phonetic: "/ˈfɪŋɡər/", category: "corpo", emoji: "☝️" },
+  { en: "Heart", pt: "Coração", phonetic: "/hɑːrt/", category: "corpo", emoji: "❤️" },
+
+  // ---------- Roupas ----------
+  { en: "Shirt", pt: "Camisa", phonetic: "/ʃɜːrt/", category: "roupas", emoji: "👕" },
+  { en: "Pants", pt: "Calça", phonetic: "/pænts/", category: "roupas", emoji: "👖" },
+  { en: "Shoes", pt: "Sapatos", phonetic: "/ʃuːz/", category: "roupas", emoji: "👟" },
+  { en: "Dress", pt: "Vestido", phonetic: "/drɛs/", category: "roupas", emoji: "👗" },
+  { en: "Jacket", pt: "Jaqueta", phonetic: "/ˈdʒækɪt/", category: "roupas", emoji: "🧥" },
+  { en: "Hat", pt: "Chapéu", phonetic: "/hæt/", category: "roupas", emoji: "🎩" },
+  { en: "Socks", pt: "Meias", phonetic: "/sɒks/", category: "roupas", emoji: "🧦" },
+  { en: "Skirt", pt: "Saia", phonetic: "/skɜːrt/", category: "roupas", emoji: "👗" },
+  { en: "Coat", pt: "Casaco", phonetic: "/koʊt/", category: "roupas", emoji: "🥼" },
+  { en: "Glasses", pt: "Óculos", phonetic: "/ˈɡlæsɪz/", category: "roupas", emoji: "👓" },
+
+  // ---------- Lugares ----------
+  { en: "House", pt: "Casa", phonetic: "/haʊs/", category: "lugares", emoji: "🏠" },
+  { en: "School", pt: "Escola", phonetic: "/skuːl/", category: "lugares", emoji: "🏫" },
+  { en: "Hospital", pt: "Hospital", phonetic: "/ˈhɒspɪtəl/", category: "lugares", emoji: "🏥" },
+  { en: "Store", pt: "Loja", phonetic: "/stɔːr/", category: "lugares", emoji: "🏬" },
+  { en: "Restaurant", pt: "Restaurante", phonetic: "/ˈrɛstərɒnt/", category: "lugares", emoji: "🍽️" },
+  { en: "Park", pt: "Parque", phonetic: "/pɑːrk/", category: "lugares", emoji: "🌳" },
+  { en: "Beach", pt: "Praia", phonetic: "/biːtʃ/", category: "lugares", emoji: "🏖️" },
+  { en: "City", pt: "Cidade", phonetic: "/ˈsɪti/", category: "lugares", emoji: "🏙️" },
+  { en: "Country", pt: "País", phonetic: "/ˈkʌntri/", category: "lugares", emoji: "🌍" },
+  { en: "Airport", pt: "Aeroporto", phonetic: "/ˈɛrpɔːrt/", category: "lugares", emoji: "✈️" },
+  { en: "Station", pt: "Estação", phonetic: "/ˈsteɪʃən/", category: "lugares", emoji: "🚉" },
+  { en: "Church", pt: "Igreja", phonetic: "/tʃɜːrtʃ/", category: "lugares", emoji: "⛪" },
+  { en: "Bank", pt: "Banco", phonetic: "/bæŋk/", category: "lugares", emoji: "🏦" },
+
+  // ---------- Meses ----------
+  { en: "January", pt: "Janeiro", phonetic: "/ˈdʒænjuˌɛri/", category: "meses", emoji: "📅" },
+  { en: "February", pt: "Fevereiro", phonetic: "/ˈfɛbjuˌɛri/", category: "meses", emoji: "📅" },
+  { en: "March", pt: "Março", phonetic: "/mɑːrtʃ/", category: "meses", emoji: "📅" },
+  { en: "April", pt: "Abril", phonetic: "/ˈeɪprəl/", category: "meses", emoji: "📅" },
+  { en: "May", pt: "Maio", phonetic: "/meɪ/", category: "meses", emoji: "📅" },
+  { en: "June", pt: "Junho", phonetic: "/dʒuːn/", category: "meses", emoji: "📅" },
+  { en: "July", pt: "Julho", phonetic: "/dʒʊˈlaɪ/", category: "meses", emoji: "📅" },
+  { en: "August", pt: "Agosto", phonetic: "/ˈɔːɡəst/", category: "meses", emoji: "📅" },
+  { en: "September", pt: "Setembro", phonetic: "/sɛpˈtɛmbər/", category: "meses", emoji: "📅" },
+  { en: "October", pt: "Outubro", phonetic: "/ɒkˈtoʊbər/", category: "meses", emoji: "📅" },
+  { en: "November", pt: "Novembro", phonetic: "/noʊˈvɛmbər/", category: "meses", emoji: "📅" },
+  { en: "December", pt: "Dezembro", phonetic: "/dɪˈsɛmbər/", category: "meses", emoji: "📅" },
+
+  // ---------- Transporte ----------
+  { en: "Car", pt: "Carro", phonetic: "/kɑːr/", category: "transporte", emoji: "🚗" },
+  { en: "Bus", pt: "Ônibus", phonetic: "/bʌs/", category: "transporte", emoji: "🚌" },
+  { en: "Train", pt: "Trem", phonetic: "/treɪn/", category: "transporte", emoji: "🚆" },
+  { en: "Airplane", pt: "Avião", phonetic: "/ˈɛrpleɪn/", category: "transporte", emoji: "✈️" },
+  { en: "Bicycle", pt: "Bicicleta", phonetic: "/ˈbaɪsɪkəl/", category: "transporte", emoji: "🚲" },
+  { en: "Boat", pt: "Barco", phonetic: "/boʊt/", category: "transporte", emoji: "🚤" },
+  { en: "Taxi", pt: "Táxi", phonetic: "/ˈtæksi/", category: "transporte", emoji: "🚕" },
+  { en: "Subway", pt: "Metrô", phonetic: "/ˈsʌbweɪ/", category: "transporte", emoji: "🚇" },
+  { en: "Motorcycle", pt: "Moto", phonetic: "/ˈmoʊtərˌsaɪkəl/", category: "transporte", emoji: "🏍️" },
+  { en: "Truck", pt: "Caminhão", phonetic: "/trʌk/", category: "transporte", emoji: "🚚" },
+
+  // ---------- Profissões ----------
+  { en: "Teacher", pt: "Professor(a)", phonetic: "/ˈtiːtʃər/", category: "profissoes", emoji: "👩‍🏫" },
+  { en: "Doctor", pt: "Médico(a)", phonetic: "/ˈdɒktər/", category: "profissoes", emoji: "👨‍⚕️" },
+  { en: "Engineer", pt: "Engenheiro(a)", phonetic: "/ˌɛndʒɪˈnɪr/", category: "profissoes", emoji: "👷" },
+  { en: "Nurse", pt: "Enfermeiro(a)", phonetic: "/nɜːrs/", category: "profissoes", emoji: "👩‍⚕️" },
+  { en: "Lawyer", pt: "Advogado(a)", phonetic: "/ˈlɔːjər/", category: "profissoes", emoji: "⚖️" },
+  { en: "Chef", pt: "Cozinheiro(a)", phonetic: "/ʃɛf/", category: "profissoes", emoji: "👨‍🍳" },
+  { en: "Police officer", pt: "Policial", phonetic: "/pəˈliːs ˈɒfɪsər/", category: "profissoes", emoji: "👮" },
+  { en: "Driver", pt: "Motorista", phonetic: "/ˈdraɪvər/", category: "profissoes", emoji: "🚖" },
+  { en: "Artist", pt: "Artista", phonetic: "/ˈɑːrtɪst/", category: "profissoes", emoji: "🎨" },
+  { en: "Farmer", pt: "Fazendeiro(a)", phonetic: "/ˈfɑːrmər/", category: "profissoes", emoji: "🧑‍🌾" },
+  { en: "Student", pt: "Estudante", phonetic: "/ˈstuːdənt/", category: "profissoes", emoji: "🎓" },
+  { en: "Waiter", pt: "Garçom", phonetic: "/ˈweɪtər/", category: "profissoes", emoji: "🧑‍🍽️" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -715,9 +853,8 @@ function renderDiff(tokens) {
 
 function setRecordingUI(active) {
   isListening = active;
-  startRecordBtn.disabled = active;
   startRecordBtn.classList.toggle("recording", active);
-  startRecordBtn.textContent = active ? "🎙️ Ouvindo…" : "🎤 Falar / Testar";
+  startRecordBtn.textContent = active ? "🎙️ Solte para verificar" : "🎤 Segure para falar";
   if (active) {
     feedbackPlaceholder.classList.remove("hidden");
     feedbackContainer.classList.add("hidden");
@@ -857,15 +994,32 @@ micPermissionBtn.addEventListener("click", () => {
       "Para liberar:\n" +
       "1. Clique no ícone de cadeado (ou de microfone) na barra de endereço.\n" +
       "2. Encontre \"Microfone\" e mude para \"Permitir\".\n" +
-      "3. Recarregue a página e toque em \"Falar / Testar\" de novo."
+      "3. Recarregue a página e segure \"Falar\" de novo."
     );
   } else {
     requestMicPermission();
   }
 });
 
-startRecordBtn.addEventListener("click", async () => {
-  if (isListening) return;
+// ---------------------------------------------------------------------------
+// Gravação "segure para falar, solte para verificar"
+// ---------------------------------------------------------------------------
+let finalTranscript = "";
+let interimTranscript = "";
+let recognitionActive = false;
+let lastRecognitionError = null;
+
+function buildRecognition() {
+  const rec = new SpeechRecognitionCtor();
+  rec.lang = "en-US";
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.maxAlternatives = 1;
+  return rec;
+}
+
+async function beginRecording() {
+  if (isListening || recognitionActive) return;
 
   if (!SpeechRecognitionCtor) {
     alert("Seu navegador não suporta reconhecimento de voz. Tente usar o Google Chrome ou Edge.");
@@ -881,65 +1035,116 @@ startRecordBtn.addEventListener("click", async () => {
     return;
   }
 
-  // Garante a permissão de microfone ANTES de iniciar o reconhecimento,
-  // com uma mensagem clara caso o usuário negue o acesso.
-  startRecordBtn.disabled = true;
+  // Garante a permissão de microfone ANTES de iniciar o reconhecimento.
   const granted = await requestMicPermission();
-  startRecordBtn.disabled = false;
   if (!granted) return;
 
-  recognition = new SpeechRecognitionCtor();
-  recognition.lang = "en-US";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+  // Pode ter soltado o botão enquanto esperávamos a permissão.
+  if (isListening || recognitionActive) return;
 
+  finalTranscript = "";
+  interimTranscript = "";
+  lastRecognitionError = null;
+  recognition = buildRecognition();
+  recognitionActive = true;
   setRecordingUI(true);
+
+  recognition.onresult = (event) => {
+    let interim = "";
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const piece = event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        finalTranscript = (finalTranscript + " " + piece).trim();
+      } else {
+        interim += piece;
+      }
+    }
+    interimTranscript = interim;
+    const preview = (finalTranscript + " " + interimTranscript).trim();
+    if (isListening) {
+      feedbackPlaceholderText.textContent = preview ? `“${preview}”` : "Fale agora…";
+    }
+  };
+
+  recognition.onerror = (event) => {
+    lastRecognitionError = event.error;
+    if (event.error === "not-allowed") setMicBannerState("denied");
+  };
+
+  recognition.onend = () => {
+    recognitionActive = false;
+    setRecordingUI(false);
+    processRecognitionResult(targetText);
+  };
 
   try {
     recognition.start();
   } catch (e) {
+    recognitionActive = false;
     setRecordingUI(false);
     showToast("⚠️ Não foi possível iniciar o microfone. Tente novamente.");
-    return;
   }
+}
 
-  recognition.onresult = (event) => {
-    const speechResult = event.results[0][0].transcript.trim();
-    feedbackPlaceholder.classList.add("hidden");
-    feedbackContainer.classList.remove("hidden");
-    recognizedTextEl.textContent = `"${speechResult}"`;
+function endRecording() {
+  if (recognition && recognitionActive) {
+    recognition.stop();
+  }
+}
 
-    const targetWords = cleanWords(targetText);
-    const spokenWords = cleanWords(speechResult);
-    const { tokens, accuracy } = diffWords(targetWords, spokenWords);
-    renderDiff(tokens);
-    applyFeedbackStyle(accuracy);
-    recordAttempt(targetText, accuracy);
-  };
+function processRecognitionResult(targetText) {
+  const speechResult = (finalTranscript || interimTranscript).trim();
+  feedbackPlaceholder.classList.add("hidden");
+  feedbackContainer.classList.remove("hidden");
 
-  recognition.onerror = (event) => {
-    feedbackPlaceholder.classList.add("hidden");
-    feedbackContainer.classList.remove("hidden");
-    feedbackContainer.className = "p-5 rounded-2xl text-left border bg-amber-50 border-amber-200";
-    diffOutputEl.innerHTML = "";
-    feedbackMessageEl.className = "font-bold mb-3 text-amber-700";
-
+  if (!speechResult) {
     const errorMessages = {
       "not-allowed": "permissão de microfone negada. Toque em \"permitir\" acima e tente de novo.",
-      "no-speech": "não detectamos nenhuma fala. Fale mais perto do microfone e tente de novo.",
       "audio-capture": "não encontramos um microfone disponível.",
       "network": "problema de conexão durante o reconhecimento. Verifique sua internet.",
       "service-not-allowed": "o serviço de reconhecimento de voz não está disponível agora.",
-      "aborted": "a gravação foi interrompida.",
     };
-    recognizedTextEl.textContent = "Não foi possível capturar o áudio.";
-    feedbackMessageEl.textContent = `Erro: ${errorMessages[event.error] || event.error}`;
+    feedbackContainer.className = "p-5 rounded-2xl text-left border bg-amber-50 border-amber-200";
+    recognizedTextEl.textContent = "Não detectamos nenhuma fala.";
+    diffOutputEl.innerHTML = "";
+    feedbackMessageEl.className = "font-bold mb-3 text-amber-700";
+    feedbackMessageEl.textContent = lastRecognitionError && errorMessages[lastRecognitionError]
+      ? `Erro: ${errorMessages[lastRecognitionError]}`
+      : "Segure o botão, fale bem perto do microfone e solte quando terminar.";
+    return;
+  }
 
-    if (event.error === "not-allowed") setMicBannerState("denied");
-  };
+  recognizedTextEl.textContent = `"${speechResult}"`;
+  const targetWords = cleanWords(targetText);
+  const spokenWords = cleanWords(speechResult);
+  const { tokens, accuracy } = diffWords(targetWords, spokenWords);
+  renderDiff(tokens);
+  applyFeedbackStyle(accuracy);
+  recordAttempt(targetText, accuracy);
+}
 
-  recognition.onend = () => setRecordingUI(false);
+// Mouse, toque e teclado: segurar para gravar, soltar para verificar.
+startRecordBtn.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  beginRecording();
 });
+["pointerup", "pointerleave", "pointercancel"].forEach((evtName) => {
+  startRecordBtn.addEventListener(evtName, () => endRecording());
+});
+startRecordBtn.addEventListener("keydown", (e) => {
+  if ((e.key === " " || e.key === "Enter") && !e.repeat) {
+    e.preventDefault();
+    beginRecording();
+  }
+});
+startRecordBtn.addEventListener("keyup", (e) => {
+  if (e.key === " " || e.key === "Enter") {
+    e.preventDefault();
+    endRecording();
+  }
+});
+// Evita que o menu de contexto/seleção atrapalhe o "segurar" no mobile.
+startRecordBtn.addEventListener("contextmenu", (e) => e.preventDefault());
 
 function applyFeedbackStyle(accuracy) {
   let colorClasses, textClass, message;

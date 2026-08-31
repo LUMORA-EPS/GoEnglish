@@ -136,6 +136,13 @@
     <button data-wcategory="dias" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">📅 Dias</button>
     <button data-wcategory="verbos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🏃 Verbos</button>
     <button data-wcategory="objetos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🪑 Objetos</button>
+    <button data-wcategory="adjetivos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">✨ Adjetivos</button>
+    <button data-wcategory="corpo" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🫀 Corpo</button>
+    <button data-wcategory="roupas" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">👕 Roupas</button>
+    <button data-wcategory="lugares" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🏙️ Lugares</button>
+    <button data-wcategory="meses" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">📆 Meses</button>
+    <button data-wcategory="transporte" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🚗 Transporte</button>
+    <button data-wcategory="profissoes" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">👷 Profissões</button>
   </div>
 
   <div id="words-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
@@ -175,8 +182,9 @@
 
         <div class="flex flex-wrap gap-3 mt-6">
           <button id="listen-target-btn" class="flex-1 min-w-[140px] bg-[--paper] text-[--ink] font-semibold text-sm px-4 py-3 rounded-xl hover:bg-[--paper]/90 transition-colors">🔊 Ouvir modelo</button>
-          <button id="start-record-btn" class="flex-1 min-w-[140px] bg-[--amber] text-[--ink] font-semibold text-sm px-4 py-3 rounded-xl hover:brightness-95 transition-all">🎤 Falar / Testar</button>
+          <button id="start-record-btn" class="flex-1 min-w-[140px] bg-[--amber] text-[--ink] font-semibold text-sm px-4 py-3 rounded-xl hover:brightness-95 transition-all select-none" style="touch-action: none;">🎤 Segure para falar</button>
         </div>
+        <p class="text-xs font-mono text-[--paper]/40 mt-2 text-center">segure o botão e fale, solte para ver o resultado</p>
         <button id="random-phrase-btn" class="w-full mt-3 text-xs font-mono text-[--paper]/50 hover:text-[--paper]/80 transition-colors">🎲 surpreenda-me com outra frase</button>
       </div>
 
