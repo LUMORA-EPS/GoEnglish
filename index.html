@@ -22,6 +22,7 @@
 
     <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-[--ink]/70">
       <a href="#vocabulario" class="hover:text-[--ink] transition-colors">Vocabulário</a>
+      <a href="#palavras" class="hover:text-[--ink] transition-colors">Palavras &amp; números</a>
       <a href="#laboratorio" class="hover:text-[--ink] transition-colors">Laboratório de fala</a>
       <a href="#progresso" class="hover:text-[--ink] transition-colors">Progresso</a>
     </nav>
@@ -39,6 +40,7 @@
   <div id="mobile-menu" class="hidden md:hidden border-t border-[--ink]/10 bg-[--paper]">
     <div class="px-5 py-3 flex flex-col gap-1 font-medium text-sm">
       <a href="#vocabulario" class="mobile-link py-2">Vocabulário</a>
+      <a href="#palavras" class="mobile-link py-2">Palavras &amp; números</a>
       <a href="#laboratorio" class="mobile-link py-2">Laboratório de fala</a>
       <a href="#progresso" class="mobile-link py-2">Progresso</a>
     </div>
@@ -117,6 +119,28 @@
   <p id="empty-state" class="hidden text-center text-[--ink]/40 py-16 font-mono text-sm">/ nenhuma frase encontrada /</p>
 </section>
 
+<!-- ================= PALAVRAS & NÚMEROS ================= -->
+<section id="palavras" class="max-w-6xl mx-auto px-5 md:px-8 py-16 border-t border-[--ink]/10">
+  <div class="mb-8 max-w-lg">
+    <p class="font-mono text-xs tracking-[0.2em] uppercase text-[--teal]">/ palavras &amp; números /</p>
+    <h2 class="font-display font-semibold text-3xl mt-2">Vocabulário essencial, cartão por cartão</h2>
+    <p class="text-[--ink]/60 mt-2">Números, cores, animais, família, dias da semana, verbos e objetos. Toque no cartão pra virar e ver a tradução, ou use os botões pra ouvir e praticar.</p>
+  </div>
+
+  <div class="flex flex-wrap gap-2 mb-8" id="word-category-filters">
+    <button data-wcategory="todos" class="wcategory-btn active px-4 py-2 rounded-full text-sm font-medium transition-colors">Todos</button>
+    <button data-wcategory="numeros" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🔢 Números</button>
+    <button data-wcategory="cores" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🎨 Cores</button>
+    <button data-wcategory="animais" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🐾 Animais</button>
+    <button data-wcategory="familia" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">👪 Família</button>
+    <button data-wcategory="dias" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">📅 Dias</button>
+    <button data-wcategory="verbos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🏃 Verbos</button>
+    <button data-wcategory="objetos" class="wcategory-btn px-4 py-2 rounded-full text-sm font-medium transition-colors">🪑 Objetos</button>
+  </div>
+
+  <div id="words-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+</section>
+
 <!-- ================= LABORATORIO ================= -->
 <section id="laboratorio" class="border-y border-[--ink]/10 bg-[--ink] text-[--paper]">
   <div class="max-w-6xl mx-auto px-5 md:px-8 py-16">
@@ -142,6 +166,11 @@
             <button data-rate="0.9" class="rate-btn active px-3 py-1 rounded-full text-xs font-medium">Normal</button>
             <button data-rate="1.1" class="rate-btn px-3 py-1 rounded-full text-xs font-medium">Rápido</button>
           </div>
+        </div>
+
+        <div id="mic-permission-banner" class="hidden mt-5 items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-xs font-mono">
+          <span id="mic-permission-text">🎙️ Precisamos da permissão do microfone para te ouvir.</span>
+          <button id="mic-permission-btn" class="underline underline-offset-2 shrink-0">permitir</button>
         </div>
 
         <div class="flex flex-wrap gap-3 mt-6">

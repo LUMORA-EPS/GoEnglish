@@ -186,11 +186,136 @@ const lessonsData = [
 ];
 
 // ---------------------------------------------------------------------------
+// Base de dados de palavras soltas (flashcards) — números, cores, animais...
+// ---------------------------------------------------------------------------
+const wordsData = [
+  // ---------- Números ----------
+  { en: "Zero", pt: "Zero", phonetic: "/ˈzɪəroʊ/", category: "numeros", emoji: "0️⃣" },
+  { en: "One", pt: "Um", phonetic: "/wʌn/", category: "numeros", emoji: "1️⃣" },
+  { en: "Two", pt: "Dois", phonetic: "/tuː/", category: "numeros", emoji: "2️⃣" },
+  { en: "Three", pt: "Três", phonetic: "/θriː/", category: "numeros", emoji: "3️⃣" },
+  { en: "Four", pt: "Quatro", phonetic: "/fɔːr/", category: "numeros", emoji: "4️⃣" },
+  { en: "Five", pt: "Cinco", phonetic: "/faɪv/", category: "numeros", emoji: "5️⃣" },
+  { en: "Six", pt: "Seis", phonetic: "/sɪks/", category: "numeros", emoji: "6️⃣" },
+  { en: "Seven", pt: "Sete", phonetic: "/ˈsɛvən/", category: "numeros", emoji: "7️⃣" },
+  { en: "Eight", pt: "Oito", phonetic: "/eɪt/", category: "numeros", emoji: "8️⃣" },
+  { en: "Nine", pt: "Nove", phonetic: "/naɪn/", category: "numeros", emoji: "9️⃣" },
+  { en: "Ten", pt: "Dez", phonetic: "/tɛn/", category: "numeros", emoji: "🔟" },
+  { en: "Eleven", pt: "Onze", phonetic: "/ɪˈlɛvən/", category: "numeros", emoji: "🔢" },
+  { en: "Twelve", pt: "Doze", phonetic: "/twɛlv/", category: "numeros", emoji: "🔢" },
+  { en: "Thirteen", pt: "Treze", phonetic: "/ˌθɜːrˈtiːn/", category: "numeros", emoji: "🔢" },
+  { en: "Fourteen", pt: "Catorze", phonetic: "/ˌfɔːrˈtiːn/", category: "numeros", emoji: "🔢" },
+  { en: "Fifteen", pt: "Quinze", phonetic: "/ˌfɪfˈtiːn/", category: "numeros", emoji: "🔢" },
+  { en: "Sixteen", pt: "Dezesseis", phonetic: "/ˌsɪksˈtiːn/", category: "numeros", emoji: "🔢" },
+  { en: "Seventeen", pt: "Dezessete", phonetic: "/ˌsɛvənˈtiːn/", category: "numeros", emoji: "🔢" },
+  { en: "Eighteen", pt: "Dezoito", phonetic: "/ˌeɪˈtiːn/", category: "numeros", emoji: "🔢" },
+  { en: "Nineteen", pt: "Dezenove", phonetic: "/ˌnaɪnˈtiːn/", category: "numeros", emoji: "🔢" },
+  { en: "Twenty", pt: "Vinte", phonetic: "/ˈtwɛnti/", category: "numeros", emoji: "🔢" },
+  { en: "Thirty", pt: "Trinta", phonetic: "/ˈθɜːrti/", category: "numeros", emoji: "🔢" },
+  { en: "Forty", pt: "Quarenta", phonetic: "/ˈfɔːrti/", category: "numeros", emoji: "🔢" },
+  { en: "Fifty", pt: "Cinquenta", phonetic: "/ˈfɪfti/", category: "numeros", emoji: "🔢" },
+  { en: "Sixty", pt: "Sessenta", phonetic: "/ˈsɪksti/", category: "numeros", emoji: "🔢" },
+  { en: "Seventy", pt: "Setenta", phonetic: "/ˈsɛvənti/", category: "numeros", emoji: "🔢" },
+  { en: "Eighty", pt: "Oitenta", phonetic: "/ˈeɪti/", category: "numeros", emoji: "🔢" },
+  { en: "Ninety", pt: "Noventa", phonetic: "/ˈnaɪnti/", category: "numeros", emoji: "🔢" },
+  { en: "One hundred", pt: "Cem", phonetic: "/wʌn ˈhʌndrəd/", category: "numeros", emoji: "💯" },
+  { en: "First", pt: "Primeiro", phonetic: "/fɜːrst/", category: "numeros", emoji: "🥇" },
+  { en: "Second", pt: "Segundo", phonetic: "/ˈsɛkənd/", category: "numeros", emoji: "🥈" },
+  { en: "Third", pt: "Terceiro", phonetic: "/θɜːrd/", category: "numeros", emoji: "🥉" },
+
+  // ---------- Cores ----------
+  { en: "Red", pt: "Vermelho", phonetic: "/rɛd/", category: "cores", emoji: "🔴" },
+  { en: "Blue", pt: "Azul", phonetic: "/bluː/", category: "cores", emoji: "🔵" },
+  { en: "Green", pt: "Verde", phonetic: "/ɡriːn/", category: "cores", emoji: "🟢" },
+  { en: "Yellow", pt: "Amarelo", phonetic: "/ˈjɛloʊ/", category: "cores", emoji: "🟡" },
+  { en: "Black", pt: "Preto", phonetic: "/blæk/", category: "cores", emoji: "⚫" },
+  { en: "White", pt: "Branco", phonetic: "/waɪt/", category: "cores", emoji: "⚪" },
+  { en: "Orange", pt: "Laranja", phonetic: "/ˈɔːrɪndʒ/", category: "cores", emoji: "🟠" },
+  { en: "Purple", pt: "Roxo", phonetic: "/ˈpɜːrpəl/", category: "cores", emoji: "🟣" },
+  { en: "Pink", pt: "Rosa", phonetic: "/pɪŋk/", category: "cores", emoji: "🌸" },
+  { en: "Brown", pt: "Marrom", phonetic: "/braʊn/", category: "cores", emoji: "🟤" },
+  { en: "Gray", pt: "Cinza", phonetic: "/ɡreɪ/", category: "cores", emoji: "🐘" },
+
+  // ---------- Animais ----------
+  { en: "Dog", pt: "Cachorro", phonetic: "/dɔːɡ/", category: "animais", emoji: "🐶" },
+  { en: "Cat", pt: "Gato", phonetic: "/kæt/", category: "animais", emoji: "🐱" },
+  { en: "Bird", pt: "Pássaro", phonetic: "/bɜːrd/", category: "animais", emoji: "🐦" },
+  { en: "Fish", pt: "Peixe", phonetic: "/fɪʃ/", category: "animais", emoji: "🐟" },
+  { en: "Horse", pt: "Cavalo", phonetic: "/hɔːrs/", category: "animais", emoji: "🐴" },
+  { en: "Cow", pt: "Vaca", phonetic: "/kaʊ/", category: "animais", emoji: "🐮" },
+  { en: "Pig", pt: "Porco", phonetic: "/pɪɡ/", category: "animais", emoji: "🐷" },
+  { en: "Chicken", pt: "Galinha", phonetic: "/ˈtʃɪkɪn/", category: "animais", emoji: "🐔" },
+  { en: "Lion", pt: "Leão", phonetic: "/ˈlaɪən/", category: "animais", emoji: "🦁" },
+  { en: "Elephant", pt: "Elefante", phonetic: "/ˈɛlɪfənt/", category: "animais", emoji: "🐘" },
+  { en: "Rabbit", pt: "Coelho", phonetic: "/ˈræbɪt/", category: "animais", emoji: "🐰" },
+  { en: "Mouse", pt: "Rato", phonetic: "/maʊs/", category: "animais", emoji: "🐭" },
+
+  // ---------- Família ----------
+  { en: "Mother", pt: "Mãe", phonetic: "/ˈmʌðər/", category: "familia", emoji: "👩" },
+  { en: "Father", pt: "Pai", phonetic: "/ˈfɑːðər/", category: "familia", emoji: "👨" },
+  { en: "Brother", pt: "Irmão", phonetic: "/ˈbrʌðər/", category: "familia", emoji: "👦" },
+  { en: "Sister", pt: "Irmã", phonetic: "/ˈsɪstər/", category: "familia", emoji: "👧" },
+  { en: "Son", pt: "Filho", phonetic: "/sʌn/", category: "familia", emoji: "🧒" },
+  { en: "Daughter", pt: "Filha", phonetic: "/ˈdɔːtər/", category: "familia", emoji: "👧" },
+  { en: "Grandmother", pt: "Avó", phonetic: "/ˈɡrænˌmʌðər/", category: "familia", emoji: "👵" },
+  { en: "Grandfather", pt: "Avô", phonetic: "/ˈɡrænˌfɑːðər/", category: "familia", emoji: "👴" },
+  { en: "Aunt", pt: "Tia", phonetic: "/ænt/", category: "familia", emoji: "👩" },
+  { en: "Uncle", pt: "Tio", phonetic: "/ˈʌŋkəl/", category: "familia", emoji: "👨" },
+  { en: "Cousin", pt: "Primo(a)", phonetic: "/ˈkʌzən/", category: "familia", emoji: "🧑" },
+  { en: "Husband", pt: "Marido", phonetic: "/ˈhʌzbənd/", category: "familia", emoji: "🤵" },
+  { en: "Wife", pt: "Esposa", phonetic: "/waɪf/", category: "familia", emoji: "👰" },
+
+  // ---------- Dias da semana ----------
+  { en: "Monday", pt: "Segunda-feira", phonetic: "/ˈmʌndeɪ/", category: "dias", emoji: "📅" },
+  { en: "Tuesday", pt: "Terça-feira", phonetic: "/ˈtuːzdeɪ/", category: "dias", emoji: "📅" },
+  { en: "Wednesday", pt: "Quarta-feira", phonetic: "/ˈwɛnzdeɪ/", category: "dias", emoji: "📅" },
+  { en: "Thursday", pt: "Quinta-feira", phonetic: "/ˈθɜːrzdeɪ/", category: "dias", emoji: "📅" },
+  { en: "Friday", pt: "Sexta-feira", phonetic: "/ˈfraɪdeɪ/", category: "dias", emoji: "📅" },
+  { en: "Saturday", pt: "Sábado", phonetic: "/ˈsætərdeɪ/", category: "dias", emoji: "🎉" },
+  { en: "Sunday", pt: "Domingo", phonetic: "/ˈsʌndeɪ/", category: "dias", emoji: "☀️" },
+  { en: "Today", pt: "Hoje", phonetic: "/təˈdeɪ/", category: "dias", emoji: "📍" },
+  { en: "Tomorrow", pt: "Amanhã", phonetic: "/təˈmɒroʊ/", category: "dias", emoji: "➡️" },
+  { en: "Yesterday", pt: "Ontem", phonetic: "/ˈjɛstərdeɪ/", category: "dias", emoji: "⬅️" },
+
+  // ---------- Verbos comuns ----------
+  { en: "To eat", pt: "Comer", phonetic: "/tuː iːt/", category: "verbos", emoji: "🍽️" },
+  { en: "To drink", pt: "Beber", phonetic: "/tuː drɪŋk/", category: "verbos", emoji: "🥤" },
+  { en: "To sleep", pt: "Dormir", phonetic: "/tuː sliːp/", category: "verbos", emoji: "😴" },
+  { en: "To work", pt: "Trabalhar", phonetic: "/tuː wɜːrk/", category: "verbos", emoji: "💼" },
+  { en: "To study", pt: "Estudar", phonetic: "/tuː ˈstʌdi/", category: "verbos", emoji: "📚" },
+  { en: "To walk", pt: "Andar", phonetic: "/tuː wɔːk/", category: "verbos", emoji: "🚶" },
+  { en: "To run", pt: "Correr", phonetic: "/tuː rʌn/", category: "verbos", emoji: "🏃" },
+  { en: "To read", pt: "Ler", phonetic: "/tuː riːd/", category: "verbos", emoji: "📖" },
+  { en: "To write", pt: "Escrever", phonetic: "/tuː raɪt/", category: "verbos", emoji: "✍️" },
+  { en: "To speak", pt: "Falar", phonetic: "/tuː spiːk/", category: "verbos", emoji: "🗣️" },
+  { en: "To listen", pt: "Ouvir", phonetic: "/tuː ˈlɪsən/", category: "verbos", emoji: "👂" },
+  { en: "To watch", pt: "Assistir", phonetic: "/tuː wɒtʃ/", category: "verbos", emoji: "📺" },
+
+  // ---------- Objetos do dia a dia ----------
+  { en: "Table", pt: "Mesa", phonetic: "/ˈteɪbəl/", category: "objetos", emoji: "🪑" },
+  { en: "Chair", pt: "Cadeira", phonetic: "/tʃɛr/", category: "objetos", emoji: "💺" },
+  { en: "Door", pt: "Porta", phonetic: "/dɔːr/", category: "objetos", emoji: "🚪" },
+  { en: "Window", pt: "Janela", phonetic: "/ˈwɪndoʊ/", category: "objetos", emoji: "🪟" },
+  { en: "Phone", pt: "Telefone", phonetic: "/foʊn/", category: "objetos", emoji: "📱" },
+  { en: "Computer", pt: "Computador", phonetic: "/kəmˈpjuːtər/", category: "objetos", emoji: "💻" },
+  { en: "Book", pt: "Livro", phonetic: "/bʊk/", category: "objetos", emoji: "📕" },
+  { en: "Key", pt: "Chave", phonetic: "/kiː/", category: "objetos", emoji: "🔑" },
+  { en: "Bag", pt: "Bolsa/Mochila", phonetic: "/bæɡ/", category: "objetos", emoji: "🎒" },
+  { en: "Clock", pt: "Relógio", phonetic: "/klɒk/", category: "objetos", emoji: "🕐" },
+  { en: "Mirror", pt: "Espelho", phonetic: "/ˈmɪrər/", category: "objetos", emoji: "🪞" },
+  { en: "Umbrella", pt: "Guarda-chuva", phonetic: "/ʌmˈbrɛlə/", category: "objetos", emoji: "☂️" },
+];
+
+// ---------------------------------------------------------------------------
 // Estado
 // ---------------------------------------------------------------------------
 const state = {
   category: "todos",
   search: "",
+};
+
+const wordState = {
+  category: "todos",
 };
 
 const STORAGE_KEY = "falaLabProgress";
@@ -250,6 +375,13 @@ const themeToggle = document.getElementById("theme-toggle");
 const themeIcon = document.getElementById("theme-icon");
 const micVisualizer = document.getElementById("mic-visualizer");
 const feedbackPlaceholderText = document.getElementById("feedback-placeholder-text");
+
+const wordsGrid = document.getElementById("words-grid");
+const wordCategoryBtns = document.querySelectorAll(".wcategory-btn");
+
+const micPermissionBanner = document.getElementById("mic-permission-banner");
+const micPermissionText = document.getElementById("mic-permission-text");
+const micPermissionBtn = document.getElementById("mic-permission-btn");
 
 // ---------------------------------------------------------------------------
 // Menu mobile
@@ -362,6 +494,73 @@ categoryBtns.forEach((btn) => {
 searchInput.addEventListener("input", (e) => {
   state.search = e.target.value;
   renderCards();
+});
+
+// ---------------------------------------------------------------------------
+// Palavras soltas (flashcards) — números, cores, animais, família, dias...
+// ---------------------------------------------------------------------------
+function getFilteredWords() {
+  if (wordState.category === "todos") return wordsData;
+  return wordsData.filter((w) => w.category === wordState.category);
+}
+
+function renderWords() {
+  const filtered = getFilteredWords();
+  wordsGrid.innerHTML = "";
+  filtered.forEach((item) => {
+    const isMastered = progress.learned.includes(item.en);
+    const card = document.createElement("div");
+    card.className = "word-card-outer";
+    card.dataset.en = item.en;
+    card.innerHTML = `
+      <div class="word-card-inner">
+        <div class="word-card-face word-card-front">
+          <span class="word-emoji">${item.emoji || "🔤"}</span>
+          <h3 class="word-en">${item.en}</h3>
+          <span class="word-hint">toque pra virar</span>
+        </div>
+        <div class="word-card-face word-card-back">
+          ${isMastered ? '<span class="word-mastered">✓</span>' : ""}
+          <p class="word-pt">${item.pt}</p>
+          <p class="word-phonetic">${item.phonetic}</p>
+          <div class="word-actions">
+            <button class="speak-btn" data-en="${escapeAttr(item.en)}">🔊 Ouvir</button>
+            <button class="practice-btn" data-en="${escapeAttr(item.en)}">🎯 Praticar</button>
+          </div>
+        </div>
+      </div>
+    `;
+    wordsGrid.appendChild(card);
+  });
+}
+
+wordsGrid.addEventListener("click", (e) => {
+  const speakBtn = e.target.closest(".speak-btn");
+  const practiceBtn = e.target.closest(".practice-btn");
+  const cardOuter = e.target.closest(".word-card-outer");
+  if (speakBtn) {
+    e.stopPropagation();
+    speakText(speakBtn.dataset.en);
+    return;
+  }
+  if (practiceBtn) {
+    e.stopPropagation();
+    setTargetPhrase(practiceBtn.dataset.en);
+    document.getElementById("laboratorio").scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  if (cardOuter) {
+    cardOuter.classList.toggle("flipped");
+  }
+});
+
+wordCategoryBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    wordCategoryBtns.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    wordState.category = btn.getAttribute("data-wcategory");
+    renderWords();
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -584,11 +783,96 @@ function stopMicVisualizer() {
   micRafId = null;
 }
 
-startRecordBtn.addEventListener("click", () => {
+// ---------------------------------------------------------------------------
+// Permissão de microfone — checagem de estado + solicitação explícita
+// ---------------------------------------------------------------------------
+function setMicBannerState(state) {
+  micPermissionBanner.classList.remove("hidden");
+  micPermissionBanner.classList.add("flex");
+  micPermissionBanner.classList.remove("state-prompt", "state-denied", "state-checking");
+
+  if (state === "granted") {
+    micPermissionBanner.classList.add("hidden");
+    micPermissionBanner.classList.remove("flex");
+    return;
+  }
+  if (state === "denied") {
+    micPermissionBanner.classList.add("state-denied");
+    micPermissionText.textContent = "🚫 O microfone está bloqueado para este site.";
+    micPermissionBtn.textContent = "como liberar?";
+  } else if (state === "checking") {
+    micPermissionBanner.classList.add("state-checking");
+    micPermissionText.textContent = "🎙️ Verificando acesso ao microfone…";
+    micPermissionBtn.textContent = "";
+  } else {
+    micPermissionBanner.classList.add("state-prompt");
+    micPermissionText.textContent = "🎙️ Precisamos da sua permissão para usar o microfone.";
+    micPermissionBtn.textContent = "permitir";
+  }
+}
+
+async function checkMicPermissionStatus() {
+  if (!navigator.permissions || !navigator.permissions.query) {
+    // Navegador sem suporte à Permissions API para microfone (ex.: Safari) —
+    // o banner só aparece se a solicitação de fato falhar.
+    return;
+  }
+  try {
+    const status = await navigator.permissions.query({ name: "microphone" });
+    setMicBannerState(status.state);
+    status.onchange = () => setMicBannerState(status.state);
+  } catch (e) {
+    // Alguns navegadores não permitem consultar "microphone" — ignora e segue.
+  }
+}
+
+// Pede a permissão de fato (dispara o prompt nativo do navegador quando necessário).
+// Retorna true se o acesso foi concedido.
+async function requestMicPermission() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert("Seu navegador não permite acesso ao microfone. Tente usar o Google Chrome ou Edge atualizados.");
+    return false;
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach((t) => t.stop());
+    setMicBannerState("granted");
+    return true;
+  } catch (e) {
+    if (e.name === "NotAllowedError" || e.name === "SecurityError" || e.name === "PermissionDeniedError") {
+      setMicBannerState("denied");
+    } else if (e.name === "NotFoundError") {
+      showToast("⚠️ Nenhum microfone foi encontrado neste dispositivo.");
+    } else {
+      showToast("⚠️ Não foi possível acessar o microfone.");
+    }
+    return false;
+  }
+}
+
+micPermissionBtn.addEventListener("click", () => {
+  if (micPermissionBtn.textContent === "como liberar?") {
+    alert(
+      "O navegador bloqueou o microfone para este site.\n\n" +
+      "Para liberar:\n" +
+      "1. Clique no ícone de cadeado (ou de microfone) na barra de endereço.\n" +
+      "2. Encontre \"Microfone\" e mude para \"Permitir\".\n" +
+      "3. Recarregue a página e toque em \"Falar / Testar\" de novo."
+    );
+  } else {
+    requestMicPermission();
+  }
+});
+
+startRecordBtn.addEventListener("click", async () => {
   if (isListening) return;
 
   if (!SpeechRecognitionCtor) {
-    alert("Seu navegador não suporta reconhecimento de voz. Tente usar o Google Chrome.");
+    alert("Seu navegador não suporta reconhecimento de voz. Tente usar o Google Chrome ou Edge.");
+    return;
+  }
+  if (!window.isSecureContext) {
+    alert("O reconhecimento de voz só funciona em conexões seguras (https) ou em localhost.");
     return;
   }
   const targetText = targetPhraseInput.value.trim();
@@ -597,13 +881,27 @@ startRecordBtn.addEventListener("click", () => {
     return;
   }
 
+  // Garante a permissão de microfone ANTES de iniciar o reconhecimento,
+  // com uma mensagem clara caso o usuário negue o acesso.
+  startRecordBtn.disabled = true;
+  const granted = await requestMicPermission();
+  startRecordBtn.disabled = false;
+  if (!granted) return;
+
   recognition = new SpeechRecognitionCtor();
   recognition.lang = "en-US";
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
   setRecordingUI(true);
-  recognition.start();
+
+  try {
+    recognition.start();
+  } catch (e) {
+    setRecordingUI(false);
+    showToast("⚠️ Não foi possível iniciar o microfone. Tente novamente.");
+    return;
+  }
 
   recognition.onresult = (event) => {
     const speechResult = event.results[0][0].transcript.trim();
@@ -623,10 +921,21 @@ startRecordBtn.addEventListener("click", () => {
     feedbackPlaceholder.classList.add("hidden");
     feedbackContainer.classList.remove("hidden");
     feedbackContainer.className = "p-5 rounded-2xl text-left border bg-amber-50 border-amber-200";
-    recognizedTextEl.textContent = "Não foi possível capturar o áudio.";
     diffOutputEl.innerHTML = "";
     feedbackMessageEl.className = "font-bold mb-3 text-amber-700";
-    feedbackMessageEl.textContent = `Erro: ${event.error === "not-allowed" ? "permissão de microfone negada" : event.error}`;
+
+    const errorMessages = {
+      "not-allowed": "permissão de microfone negada. Toque em \"permitir\" acima e tente de novo.",
+      "no-speech": "não detectamos nenhuma fala. Fale mais perto do microfone e tente de novo.",
+      "audio-capture": "não encontramos um microfone disponível.",
+      "network": "problema de conexão durante o reconhecimento. Verifique sua internet.",
+      "service-not-allowed": "o serviço de reconhecimento de voz não está disponível agora.",
+      "aborted": "a gravação foi interrompida.",
+    };
+    recognizedTextEl.textContent = "Não foi possível capturar o áudio.";
+    feedbackMessageEl.textContent = `Erro: ${errorMessages[event.error] || event.error}`;
+
+    if (event.error === "not-allowed") setMicBannerState("denied");
   };
 
   recognition.onend = () => setRecordingUI(false);
@@ -670,6 +979,7 @@ function recordAttempt(phraseEn, accuracy) {
   saveProgress(progress);
   renderStats();
   renderCards(); // atualiza badge "dominada" se aplicável
+  renderWords();
   renderHistory();
   checkAchievements(justMastered);
 }
@@ -727,6 +1037,7 @@ resetProgressBtn.addEventListener("click", () => {
   saveProgress(progress);
   renderStats();
   renderCards();
+  renderWords();
   renderHistory();
   feedbackContainer.classList.add("hidden");
   feedbackPlaceholder.classList.remove("hidden");
@@ -779,9 +1090,11 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme(savedTheme);
 
   renderCards();
+  renderWords();
   populateLessonSelect();
   setTargetPhrase("Hello");
   renderStats();
   renderHistory();
   drawHeroWave();
+  checkMicPermissionStatus();
 });
